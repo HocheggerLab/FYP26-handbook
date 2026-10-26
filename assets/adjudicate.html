@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FYP26 — adjudication</title>
+<style>
+  :root{--bg:#FAFAF8;--ink:#222C33;--muted:#627078;--accent:#35666B;--pale:#E8EFF0;--line:#D7DEDE;--bad:#B3261E;--good:#2E7D32;--warn:#8A6D00}
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--ink)}
+  header{display:flex;gap:.8rem;align-items:center;padding:.6rem 1rem;border-bottom:1px solid var(--line);background:#fff;position:sticky;top:0;z-index:5;flex-wrap:wrap}
+  header h1{font-size:1rem;margin:0;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+  .grow{flex:1}
+  .pill{border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;font-size:.8rem;color:var(--muted)}
+  .pill.warn{border-color:var(--warn);color:var(--warn)}
+  .pill.ok{border-color:var(--good);color:var(--good)}
+  button{font:inherit;background:var(--accent);color:#fff;border:0;border-radius:5px;padding:.42rem .85rem;cursor:pointer}
+  button.ghost{background:#fff;color:var(--accent);border:1px solid var(--line)}
+  button:disabled{opacity:.4;cursor:not-allowed}
+  main{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;padding:1.1rem;align-items:start}
+  @media(max-width:950px){main{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:1rem}
+  .abs{position:sticky;top:60px;max-height:calc(100vh - 80px);overflow:auto}
+  .meta{color:var(--muted);font-size:.85rem;margin-bottom:.6rem}
+  .abstract{white-space:pre-wrap}
+  .field{border:1px solid var(--line);border-radius:7px;padding:.7rem .8rem;margin-bottom:.8rem}
+  .field.conflict{border-color:var(--warn);background:#FFFDF5}
+  .field h3{margin:0 0 .5rem;font-size:.92rem;letter-spacing:.02em}
+  .opts{display:flex;gap:.5rem;flex-wrap:wrap}
+  .opt{border:1px solid var(--line);border-radius:6px;padding:.4rem .7rem;cursor:pointer;background:#fff;text-align:left;color:var(--ink)}
+  .opt b{display:block;font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:700}
+  .opt.sel{border-color:var(--accent);background:var(--pale);box-shadow:inset 0 0 0 1px var(--accent)}
+  .opt code{font-size:.9rem}
+  select,textarea,input[type=text]{font:inherit;width:100%;padding:.4rem .5rem;border:1px solid var(--line);border-radius:5px;background:#fff;color:inherit}
+  textarea{min-height:3rem;resize:vertical}
+  label{display:block;font-weight:600;font-size:.86rem;margin:.6rem 0 .2rem}
+  .desc{font-weight:400;color:var(--muted);font-size:.8rem;margin-bottom:.3rem}
+  .ev{background:var(--pale);border-radius:5px;padding:.4rem .6rem;font-size:.85rem;margin-top:.45rem;color:var(--accent)}
+  .hidden{display:none}
+  #start{max-width:620px;margin:3rem auto;padding:0 1rem}
+  .err{color:var(--bad);font-size:.85rem}
+  code{background:var(--pale);padding:.08rem .3rem;border-radius:3px}
+</style>
+</head>
+<body>
+
+<div id="start">
+  <h1 style="color:var(--accent)">FYP26 — adjudication</h1>
+  <p>Load a queue produced by <code>compare_annotations.py</code>. You will see only the
+     items where the two readers disagreed, plus a random sample of the ones where they
+     agreed — that sample is what tells you the error rate in everything you never look at.</p>
+  <p><strong>The answer you pick becomes the reference.</strong> The original student and
+     model records are never changed; disagreement has to survive into the analysis.</p>
+  <p><input type="file" id="file" accept=".json"></p>
+  <p class="err" id="startErr"></p>
+</div>
+
+<header class="hidden" id="bar">
+  <h1>Adjudication</h1>
+  <span class="pill" id="pos"></span>
+  <span class="pill" id="kind"></span>
+  <span class="pill" id="left"></span>
+  <span class="grow"></span>
+  <button class="ghost" id="prev">← Prev</button>
+  <button class="ghost" id="next">Next →</button>
+  <button class="ghost" id="skip">Next undecided</button>
+  <button id="export">Export reference</button>
+</header>
+
+<main class="hidden" id="app">
+  <section class="card abs">
+    <div class="meta" id="src"></div>
+    <h2 id="title" style="font-size:1.05rem;margin:.1rem 0 .55rem"></h2>
+    <div class="abstract" id="abstract"></div>
+    <div id="notes"></div>
+  </section>
+  <section class="card">
+    <div id="fields"></div>
+    <label>Why this answer?
+      <div class="desc">Recorded on the reference record. One line is enough, and it is what
+        turns a disagreement into a schema fix later.</div></label>
+    <textarea id="note" maxlength="500"></textarea>
+    <p class="err" id="err"></p>
+  </section>
+</main>
+
+<script>
+const FIELDS = ["is_tagging_paper","tag_type","locus_strategy","terminus"];
+const ENUMS = {
+  is_tagging_paper:["yes","no","unsure"],
+  tag_type:["AID","dTag","SMASH","bromo","other","unclear"],
+  locus_strategy:["endogenous","exogenous","unclear"],
+  terminus:["C-term","N-term","unclear"]
+};
+const $ = id => document.getElementById(id);
+let queue = [], decisions = {}, i = 0, KEY = "fyp26-v3-adjudication";
+
+$("file").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const d = JSON.parse(await f.text());
+    if (!d.queue?.length) throw new Error("no queue in that file");
+    queue = d.queue;
+    decisions = JSON.parse(localStorage.getItem(KEY) || "{}");
+    $("start").classList.add("hidden");
+    $("bar").classList.remove("hidden"); $("app").classList.remove("hidden");
+    i = Math.max(0, queue.findIndex(q => !settled(q)));
+    render();
+  } catch (err) { $("startErr").textContent = "Could not read that file: " + err.message; }
+};
+
+function dec(id){ return decisions[id] ||= {}; }
+function settled(q){
+  const d = decisions[q.item_id];
+  if (!d) return false;
+  const screening = d.is_tagging_paper ?? q.student.is_tagging_paper;
+  const need = screening === "no" ? ["is_tagging_paper"] : FIELDS;
+  return need.every(f => ENUMS[f].includes(d[f] ?? q.student[f])) &&
+    q.disagrees_on.filter(f => need.includes(f)).every(f => d[f] !== undefined);
+}
+
+function render(){
+  const q = queue[i], d = dec(q.item_id);
+  $("src").textContent = `PMID ${q.pmid} · ${q.item_id}`;
+  $("title").textContent = q.title;
+  $("abstract").textContent = q.abstract;
+
+  $("notes").innerHTML =
+    (q.student_confidence ? `<div class="ev">Student confidence: ${q.student_confidence}/5</div>` : "") +
+    (q.student_note ? `<div class="ev"><strong>Student note:</strong> ${esc(q.student_note)}</div>` : "");
+
+  $("fields").innerHTML = FIELDS.map(f => {
+    const conflict = q.disagrees_on.includes(f);
+    const s = q.student[f] ?? "skipped", m = q.model[f] ?? "skipped";
+    const ev = q.student_evidence?.[f];
+    const chosen = d[f];
+    const opts = conflict
+      ? `<button class="opt ${chosen===s?"sel":""}" data-f="${f}" data-v="${esc(s)}"><b>student</b><code>${esc(s)}</code></button>
+         <button class="opt ${chosen===m?"sel":""}" data-f="${f}" data-v="${esc(m)}"><b>model</b><code>${esc(m)}</code></button>`
+      : `<button class="opt ${chosen===s||!chosen?"sel":""}" data-f="${f}" data-v="${esc(s)}"><b>both agreed</b><code>${esc(s)}</code></button>`;
+    return `<div class="field ${conflict?"conflict":""}">
+      <h3>${f}${conflict?' <span style="color:var(--warn);font-size:.8rem">— disagreement</span>':""}</h3>
+      <div class="opts">${opts}</div>
+      ${ev?`<div class="ev"><strong>Student evidence:</strong> “${esc(ev)}”</div>`:""}
+      <label style="margin-top:.5rem">Neither — set it yourself</label>
+      <select data-pick="${f}">
+        <option value="">— leave as chosen above —</option>
+        ${ENUMS[f].map(o=>`<option ${chosen===o&&o!==s&&o!==m?"selected":""}>${o}</option>`).join("")}
+      </select>
+    </div>`;
+  }).join("");
+
+  $("note").value = d.adjudication_note || "";
+  $("pos").textContent = `${i+1} / ${queue.length}`;
+  $("kind").textContent = q.disagrees_on.length ? "disagreement" : "agreement check";
+  $("kind").className = "pill " + (q.disagrees_on.length ? "warn" : "");
+  const n = queue.filter(settled).length;
+  $("left").textContent = `${n} settled`;
+  $("left").className = "pill " + (n === queue.length ? "ok" : "");
+  $("prev").disabled = i === 0; $("next").disabled = i === queue.length - 1;
+  $("err").textContent = "";
+  wire();
+}
+
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function wire(){
+  document.querySelectorAll(".opt").forEach(b => b.onclick = () => {
+    const d = dec(queue[i].item_id);
+    d[b.dataset.f] = b.dataset.v;
+    const sel = document.querySelector(`[data-pick="${b.dataset.f}"]`); if (sel) sel.value = "";
+    persist(); render();
+  });
+  document.querySelectorAll("[data-pick]").forEach(s => s.onchange = () => {
+    if (!s.value) return;
+    dec(queue[i].item_id)[s.dataset.pick] = s.value;
+    persist(); render();
+  });
+}
+
+$("note").oninput = () => { dec(queue[i].item_id).adjudication_note = $("note").value; persist(); };
+
+function persist(){
+  localStorage.setItem(KEY, JSON.stringify(decisions));
+  const n = queue.filter(settled).length;
+  $("left").textContent = `${n} settled`;
+  $("left").className = "pill " + (n === queue.length ? "ok" : "");
+}
+
+$("prev").onclick = () => { if (i>0){ i--; render(); window.scrollTo(0,0);} };
+$("next").onclick = () => { if (i<queue.length-1){ i++; render(); window.scrollTo(0,0);} };
+$("skip").onclick = () => {
+  const n = queue.findIndex((q,k) => k>i && !settled(q));
+  const m = n>=0 ? n : queue.findIndex(q => !settled(q));
+  if (m<0){ $("err").textContent = "Everything is settled."; return; }
+  i = m; render(); window.scrollTo(0,0);
+};
+document.onkeydown = e => {
+  if (e.target.matches("input,select,textarea")) return;
+  if (e.key === "ArrowLeft") $("prev").click();
+  if (e.key === "ArrowRight") $("next").click();
+};
+
+$("export").onclick = () => {
+  const unsettled = queue.filter(q => !settled(q)).length;
+  if (unsettled && !confirm(`${unsettled} item(s) are still undecided and will be left out.\nExport anyway?`)) return;
+  const out = queue.filter(settled).map(q => {
+    const d = decisions[q.item_id];
+    const o = {item_id: q.item_id, annotator: "HH", annotator_role: "adjudicated",
+               stage: "abstract", schema_version: 3, annotated_at: new Date().toISOString(),
+               is_tagging_paper: d.is_tagging_paper ?? q.student.is_tagging_paper};
+    if (o.is_tagging_paper !== "no") for (const f of ["tag_type","locus_strategy","terminus"])
+      o[f] = d[f] ?? q.student[f];
+    if (d.adjudication_note?.trim()) o.adjudication_note = d.adjudication_note.trim();
+    return o;
+  });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:"application/json"}));
+  a.download = `reference_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  $("err").textContent = `Exported ${out.length} reference records.`;
+};
+</script>
+</body>
+</html>

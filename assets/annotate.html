@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FYP26 — abstract classification</title>
+<style>
+body{max-width:1100px;margin:auto;padding:1rem;font:17px/1.6 system-ui;color:#222c33;background:#fafaf8}h1{color:#35666b;font-size:1.5rem}header,.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}main{display:grid;grid-template-columns:1fr 1fr;gap:2rem}section{padding:1rem;background:white;border:1px solid #d7dede;border-radius:8px}label{display:block;margin-top:1rem;font-weight:bold}select,button{font:inherit;padding:.4rem;border:1px solid #aaa;border-radius:4px}button{cursor:pointer}select{width:100%}.hidden{display:none}#abstract{white-space:pre-wrap}#message{color:#923018}table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:.4rem;text-align:left}@media(max-width:800px){main{grid-template-columns:1fr}}
+</style></head><body>
+<h1>FYP26 — abstract classification</h1>
+<p>Classify from the supplied title and abstract only. Do not use AI or open the paper. Export after every session: browser storage is not a backup.</p>
+<details open><summary><strong>Instructions and allowed options</strong></summary>
+<table><tr><th>Field</th><th>Options</th></tr>
+<tr><td>Is this a tagging paper?</td><td>yes · no · unsure</td></tr>
+<tr><td>Tag type</td><td>AID · dTag · SMASH · bromo · other · unclear</td></tr>
+<tr><td>Locus strategy</td><td>endogenous · exogenous · unclear</td></tr>
+<tr><td>Terminus</td><td>C-term · N-term · unclear</td></tr></table>
+<p><strong>yes:</strong> the study attaches a degron or other tag to a protein. <strong>no:</strong> it does not; a natural degron motif or small-molecule degrader alone is not a tag. <strong>unsure:</strong> the abstract does not settle this.</p>
+<p>For <strong>no</strong>, skip the other fields. For <strong>yes or unsure</strong>, classify all three and queue the paper for later full-text reading. Do not read it before your abstract answers are submitted and locked.</p>
+<p><strong>AID</strong> includes AID2 and mAID; <strong>dTag</strong> covers dTAG; <strong>SMASH</strong> covers SMASh; <strong>bromo</strong> covers BromoTag. <strong>other</strong> means a stated tag outside these families, including fluorescent or epitope tags. <strong>unclear</strong> means the abstract does not identify the category.</p>
+<p><strong>endogenous:</strong> native-locus tagging. <strong>exogenous:</strong> an ectopic expression construct, whether transfected or integrated. CRISPR alone does not establish endogenous tagging. Select <strong>unclear</strong> if the abstract cannot support one option, including mixed strategies or multiple tag types. For the terminus, internal or mixed positions also fall under <strong>unclear</strong> in this simplified scheme.</p>
+</details>
+<div id="start"><label for="file">Load your assigned S?_items.json</label><input type="file" id="file" accept=".json"><p>To resume a backup, first load the same items file, then use Restore saved annotations.</p></div>
+<header id="bar" class="hidden"><strong id="who"></strong><span id="count"></span><button id="prev">← Prev</button><button id="next">Next →</button><button id="jump">Next unfinished</button><button id="restore">Restore saved annotations</button><input id="restoreFile" type="file" accept=".json" class="hidden" aria-label="Saved annotations JSON"><button id="export">Export</button></header>
+<p id="message" role="status"></p>
+<main id="app" class="hidden"><section><p id="src"></p><h2 id="title"></h2><div id="abstract"></div></section><section>
+<label for="is_tagging_paper">Is this a tagging paper?</label><select id="is_tagging_paper"></select>
+<div id="detail"><label for="tag_type">Tag type</label><select id="tag_type"></select><label for="locus_strategy">Locus strategy</label><select id="locus_strategy"></select><label for="terminus">Terminus</label><select id="terminus"></select></div>
+<p id="route"></p></section></main>
+<script>
+const ENUMS = {is_tagging_paper:['yes','no','unsure'],tag_type:['AID','dTag','SMASH','bromo','other','unclear'],locus_strategy:['endogenous','exogenous','unclear'],terminus:['C-term','N-term','unclear']};
+const FIELDS = Object.keys(ENUMS), DETAILS = FIELDS.slice(1);
+const $ = id => document.getElementById(id);
+let items=[], recs={}, who='', KEY='', i=0;
+for(const [f,options] of Object.entries(ENUMS)) $(f).innerHTML='<option value="">— choose —</option>'+options.map(v=>`<option>${v}</option>`).join('');
+function done(id){const r=recs[id];return !!r && ENUMS.is_tagging_paper.includes(r.is_tagging_paper) && (r.is_tagging_paper==='no' || DETAILS.every(f=>ENUMS[f].includes(r[f])));}
+function render(){
+ const it=items[i],r=recs[it.item_id]||{};
+ $('who').textContent=who+' · abstract pass';
+ $('count').textContent=`${i+1}/${items.length} · ${items.filter(it=>done(it.item_id)).length}/${items.length} complete`;
+ $('src').textContent=`${it.journal||'—'} · ${it.year||'—'} · PMID ${it.pmid||'—'} · ${it.item_id}`;
+ $('title').textContent=it.title; $('abstract').textContent=it.abstract;
+ for(const f of FIELDS) $(f).value=r[f]||'';
+ $('detail').classList.toggle('hidden',r.is_tagging_paper==='no');
+ $('route').textContent=r.is_tagging_paper==='no'?'Screened out.':['yes','unsure'].includes(r.is_tagging_paper)?'Queued for later full-text reading.':'';
+ $('prev').disabled=i===0; $('next').disabled=i===items.length-1;
+}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(recs));}catch(e){$('message').textContent='Browser saving failed. Export now to keep your work: '+e.message;}}
+function save(){
+ const r={item_id:items[i].item_id,annotator:who,annotator_role:'student',stage:'abstract',schema_version:3,annotated_at:new Date().toISOString()};
+ for(const f of FIELDS) if($(f).value && (f==='is_tagging_paper'||$('is_tagging_paper').value!=='no')) r[f]=$(f).value;
+ recs[r.item_id]=r; $('message').textContent='';persist();render();
+}
+function restoredRecords(data){
+ if(!Array.isArray(data)||!data.length) throw Error('Choose a non-empty v3 annotations export.');
+ const ids=new Set(items.map(it=>it.item_id)),next=Object.create(null);
+ const allowed=new Set([...FIELDS,'item_id','annotator','annotator_role','stage','schema_version','annotated_at']);
+ for(const r of data){
+  if(!r||typeof r!=='object'||Array.isArray(r)||!ids.has(r.item_id)) throw Error('Item outside the loaded set.');
+  if(Object.hasOwn(next,r.item_id)) throw Error('Duplicate item ID.');
+  if(r.schema_version!==3) throw Error('This is an older scoring scheme. Keep the original backup; reclassify using the new options.');
+  if(r.annotator!==who||r.annotator_role!=='student'||r.stage!=='abstract') throw Error('Wrong student set or pass.');
+  if(typeof r.annotated_at!=='string'||!Number.isFinite(Date.parse(r.annotated_at))) throw Error('Invalid annotation timestamp.');
+  if(Object.keys(r).some(k=>!allowed.has(k))) throw Error('Unexpected fields in this classification file.');
+  for(const f of FIELDS) if(r[f]!==undefined&&!ENUMS[f].includes(r[f])) throw Error('Invalid '+f);
+  if(r.is_tagging_paper==='no'&&DETAILS.some(f=>r[f]!==undefined)) throw Error('Screened-out records must omit detail fields.');
+  next[r.item_id]={...r};
+ }
+ return next;
+}
+$('file').onchange=async e=>{
+ const f=e.target.files[0];if(!f)return;
+ try{
+  const data=JSON.parse(await f.text()), match=f.name.match(/^(S\d+)_items\.json$/);
+  if(!match||!Array.isArray(data)||!data.length||data.some(r=>!r||typeof r.item_id!=='string'||typeof r.title!=='string'||typeof r.abstract!=='string')||new Set(data.map(r=>r.item_id)).size!==data.length) throw Error('Choose your assigned S?_items.json file.');
+  items=data;who=match[1];KEY='fyp26-v3-abstract-'+who;recs={};
+  $('message').textContent='';
+  try{const stored=localStorage.getItem(KEY);if(stored)recs=restoredRecords(Object.values(JSON.parse(stored)));}catch(err){$('message').textContent='Could not resume browser data. Restore an exported v3 backup. '+err.message;}
+  $('start').classList.add('hidden');$('bar').classList.remove('hidden');$('app').classList.remove('hidden');
+  i=items.findIndex(it=>!done(it.item_id));if(i<0)i=0;render();
+ }catch(err){$('message').textContent=err.message;}
+};
+$('app').addEventListener('change',save);
+$('prev').onclick=()=>{if(i>0){i--;render();}};
+$('next').onclick=()=>{if(i<items.length-1){i++;render();}};
+$('jump').onclick=()=>{const n=items.findIndex((it,k)=>k>i&&!done(it.item_id));const m=n<0?items.findIndex(it=>!done(it.item_id)):n;if(m<0){$('message').textContent='All items complete.';return;}i=m;render();};
+$('restore').onclick=()=>$('restoreFile').click();
+$('restoreFile').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{const next=restoredRecords(JSON.parse(await file.text()));
+  if(!confirm(`Restore ${Object.keys(next).length} of ${items.length} items for ${who}? This REPLACES current answers, including answers absent from the backup. Export current work first if needed.`))return;
+  localStorage.setItem(KEY,JSON.stringify(next));recs=next;
+  i=items.findIndex(it=>!done(it.item_id));if(i<0)i=0;render();$('message').textContent='Saved annotations restored.';
+ }catch(err){$('message').textContent='Could not restore: '+err.message+' Current answers were not replaced.';}finally{e.target.value='';}
+};
+function exportRecords(){return items.map(it=>recs[it.item_id]).filter(Boolean);}
+$('export').onclick=()=>{
+ const out=exportRecords(),complete=items.filter(it=>done(it.item_id)).length;
+ if(complete<items.length&&!confirm(`Only ${complete}/${items.length} items are complete. Export a progress backup anyway?`))return;
+ const url=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`${who}_abstract_v3_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ $('message').textContent=`Exported ${out.length} records; ${complete}/${items.length} complete. Keep your items file too.`;
+};
+window.onbeforeunload=()=>items.length?'':undefined;
+</script></body></html>
