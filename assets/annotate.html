@@ -11,13 +11,15 @@ body{max-width:1100px;margin:auto;padding:1rem;font:17px/1.6 system-ui;color:#22
 <details open><summary><strong>Instructions and allowed options</strong></summary>
 <table><tr><th>Field</th><th>Options</th></tr>
 <tr><td>Is this a tagging paper?</td><td>yes · no · unsure</td></tr>
-<tr><td>Tag type</td><td>AID · dTag · SMASH · bromo · other · unclear</td></tr>
+<tr><td>Tag type</td><td>AID · dTag · SMASH · bromo · other · multiple · unclear</td></tr>
 <tr><td>Locus strategy</td><td>endogenous · exogenous · unclear</td></tr>
 <tr><td>Terminus</td><td>C-term · N-term · unclear</td></tr></table>
 <p><strong>yes:</strong> the study attaches a degron or other tag to a protein. <strong>no:</strong> it does not; a natural degron motif or small-molecule degrader alone is not a tag. <strong>unsure:</strong> the abstract does not settle this.</p>
 <p>For <strong>no</strong>, skip the other fields. For <strong>yes or unsure</strong>, classify all three and queue the paper for later full-text reading. Do not read it before your abstract answers are submitted and locked.</p>
 <p><strong>AID</strong> includes AID2 and mAID; <strong>dTag</strong> covers dTAG; <strong>SMASH</strong> covers SMASh; <strong>bromo</strong> covers BromoTag. <strong>other</strong> means a stated tag outside these families, including fluorescent or epitope tags. <strong>unclear</strong> means the abstract does not identify the category.</p>
-<p><strong>endogenous:</strong> native-locus tagging. <strong>exogenous:</strong> an ectopic expression construct, whether transfected or integrated. CRISPR alone does not establish endogenous tagging. Select <strong>unclear</strong> if the abstract cannot support one option, including mixed strategies or multiple tag types. For the terminus, internal or mixed positions also fall under <strong>unclear</strong> in this simplified scheme.</p>
+<p><strong>endogenous:</strong> native-locus tagging. <strong>exogenous:</strong> an ectopic expression construct, whether transfected or integrated. CRISPR alone does not establish endogenous tagging. Select <strong>unclear</strong> if the abstract cannot support one option, including mixed locus strategies. For the terminus, internal or mixed positions also fall under <strong>unclear</strong> in this simplified scheme.</p>
+<p><strong>multiple:</strong> the abstract reports using or experimentally comparing more than one tag category (for example, dTag and BromoTag). Background mentions do not count. AID and AID2 together remain <strong>AID</strong>.</p>
+<p><small>26 October 2026: added multiple. Existing answers are unchanged; review combination cases previously marked unclear.</small></p>
 </details>
 <div id="start"><label for="file">Load your assigned S?_items.json</label><input type="file" id="file" accept=".json"><p>To resume a backup, first load the same items file, then use Restore saved annotations.</p></div>
 <header id="bar" class="hidden"><strong id="who"></strong><span id="count"></span><button id="prev">← Prev</button><button id="next">Next →</button><button id="jump">Next unfinished</button><button id="restore">Restore saved annotations</button><input id="restoreFile" type="file" accept=".json" class="hidden" aria-label="Saved annotations JSON"><button id="export">Export</button></header>
@@ -27,7 +29,7 @@ body{max-width:1100px;margin:auto;padding:1rem;font:17px/1.6 system-ui;color:#22
 <div id="detail"><label for="tag_type">Tag type</label><select id="tag_type"></select><label for="locus_strategy">Locus strategy</label><select id="locus_strategy"></select><label for="terminus">Terminus</label><select id="terminus"></select></div>
 <p id="route"></p></section></main>
 <script>
-const ENUMS = {is_tagging_paper:['yes','no','unsure'],tag_type:['AID','dTag','SMASH','bromo','other','unclear'],locus_strategy:['endogenous','exogenous','unclear'],terminus:['C-term','N-term','unclear']};
+const ENUMS = {is_tagging_paper:['yes','no','unsure'],tag_type:['AID','dTag','SMASH','bromo','other','multiple','unclear'],locus_strategy:['endogenous','exogenous','unclear'],terminus:['C-term','N-term','unclear']};
 const FIELDS = Object.keys(ENUMS), DETAILS = FIELDS.slice(1);
 const $ = id => document.getElementById(id);
 let items=[], recs={}, who='', KEY='', i=0;
