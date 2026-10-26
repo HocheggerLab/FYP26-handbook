@@ -604,10 +604,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-to-do-first" class="md-nav__link">
+  <a href="#the-seven-parts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What to do first
+        The seven parts
       
     </span>
   </a>
@@ -615,10 +615,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-the-parts-fit-together" class="md-nav__link">
+  <a href="#timing-and-checkpoints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How the parts fit together
+        Timing and checkpoints
       
     </span>
   </a>
@@ -626,10 +626,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-due-and-when" class="md-nav__link">
+  <a href="#keep-the-full-text-work-bounded" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is due, and when
+        Keep the full-text work bounded
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-this-informs-the-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How this informs the design
       
     </span>
   </a>
@@ -1201,10 +1212,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#what-to-do-first" class="md-nav__link">
+  <a href="#the-seven-parts" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What to do first
+        The seven parts
       
     </span>
   </a>
@@ -1212,10 +1223,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#how-the-parts-fit-together" class="md-nav__link">
+  <a href="#timing-and-checkpoints" class="md-nav__link">
     <span class="md-ellipsis">
       
-        How the parts fit together
+        Timing and checkpoints
       
     </span>
   </a>
@@ -1223,10 +1234,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-is-due-and-when" class="md-nav__link">
+  <a href="#keep-the-full-text-work-bounded" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What is due, and when
+        Keep the full-text work bounded
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-this-informs-the-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How this informs the design
       
     </span>
   </a>
@@ -1262,65 +1284,82 @@
 
 
 <h1 id="phase-1-literature">Phase 1 · Literature<a class="headerlink" href="#phase-1-literature" title="Permanent link">&para;</a></h1>
-<p><strong>Rolls out 27 October. Annotations due 10 November; protein intro due 17 November.</strong></p>
-<p><strong>Two tracks run in parallel.</strong> In Part 1, understand your gene and explain
-why degron tagging might be useful. In Part 2, evaluate agents that can find
-and extract previous tagging evidence. You do not need to finish the
-introduction before starting the annotation work.</p>
+<p><strong>Opens 27 October. Abstract classifications due 10 November; protein introduction due 17 November.</strong></p>
+<p><strong>Two tracks run in parallel:</strong> Part 1 builds your protein background; Parts
+2–7 test and apply the literature workflow. Do not wait until your introduction
+is finished before starting the abstracts.</p>
 <div class="grid" style="align-items: start;">
 <div>
 <pre class="mermaid"><code>flowchart TB
-    subgraph P1["Part 1 · Gene background"]
+    subgraph Background["Part 1 · Your protein"]
         direction TB
-        A["Read two or three reviews"] --&gt; B["Understand your gene&lt;br/&gt;Function, cell-cycle role and partners"]
-        B --&gt; C["Why would degron tagging be useful?&lt;br/&gt;What would acute removal reveal?"]
-        C --&gt; D["Write one introduction page&lt;br/&gt;and one or two slides&lt;br/&gt;Due 17 November"]
+        A["Read the supplied literature"] --&gt; B["Understand function, partners&lt;br/&gt;and the case for acute depletion"]
+        B --&gt; C["One introduction page&lt;br/&gt;and one or two slides&lt;br/&gt;Due 17 November"]
     end</code></pre>
 </div>
 <div>
 <pre class="mermaid"><code>flowchart TB
-    subgraph P2["Part 2 · Evaluation and agent runs"]
+    subgraph Literature["Parts 2–7 · Literature workflow"]
         direction TB
-        E["Has anyone tagged it before?&lt;br/&gt;Potentially thousands of papers to screen"] --&gt; F["Could an agent screen them?&lt;br/&gt;First, test whether it is any good"]
-        F --&gt; G["Practise, then annotate 50 abstracts&lt;br/&gt;without AI; submit and lock&lt;br/&gt;Due 10 November"]
-        G --&gt; H["Evaluate Agent 1 against the reference&lt;br/&gt;Can it spot tagging information&lt;br/&gt;and recommend papers to read?"]
-        H --&gt; I["Run the evaluated workflow&lt;br/&gt;on your gene's literature&lt;br/&gt;Check candidates and audit rejections"]
-        I --&gt; J["Build and lock a separate&lt;br/&gt;manual full-text reference"]
-        J --&gt; K["Run and evaluate Agent 2&lt;br/&gt;Extract tag, method, terminus&lt;br/&gt;and functional evidence"]
+        D["2 · Classify 50 abstracts independently&lt;br/&gt;Submit and lock by 10 November"]
+        D --&gt; E["3 · Run the abstract classifier"]
+        E --&gt; F["4 · Evaluate classifications&lt;br/&gt;Investigate errors"]
+        F --&gt; G["5 · Search and screen&lt;br/&gt;your gene's literature"]
+        G --&gt; H["6 · Evaluate full-text extraction&lt;br/&gt;Three papers per student&lt;br/&gt;Independent answers first, then agent"]
+        H --&gt; I["7 · Analyse relevant full texts&lt;br/&gt;Verify the tagging evidence"]
     end</code></pre>
 </div>
 </div>
-<p><strong>In Part 2, build the reference before evaluating the agent.</strong> Without
-independent human answers, we cannot tell whether it is finding evidence or
-making plausible guesses. Both tracks feed your later tagging design.</p>
-<p><strong>Parts 1 and 2 open now</strong>; part 3 adds sequence and structural information later.</p>
+<h2 id="the-seven-parts">The seven parts<a class="headerlink" href="#the-seven-parts" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
-<th></th>
+<th>Part</th>
+<th>Task</th>
+<th>Output</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>1</strong></td>
-<td><a href="1-background/">Your protein</a></td>
-<td>What it does in the cell cycle, and why anyone would want to degrade it on demand</td>
+<td><strong>1 · Your protein</strong></td>
+<td><a href="1-background/">Read the supplied background literature</a></td>
+<td>One-page introduction and one or two slides</td>
 </tr>
 <tr>
-<td><strong>2</strong></td>
-<td><a href="2-evaluation/">Tagging precedent</a></td>
-<td>Has it been tagged, with what, how, and where — found by building and then using an agent</td>
+<td><strong>2 · Abstract classification</strong></td>
+<td><a href="2-evaluation/">Independently classify 50 abstracts</a></td>
+<td>Submitted, locked reference JSON</td>
 </tr>
 <tr>
-<td><strong>3</strong></td>
-<td>Isoforms, modifications and structure</td>
-<td>What constrains <em>which</em> terminus. Opens later; we give you this data</td>
+<td><strong>3 · Literature classification with an agent</strong></td>
+<td>Run the classifier on the same abstracts after the reference is locked</td>
+<td>Saved predictions and run details</td>
+</tr>
+<tr>
+<td><strong>4 · Agent evaluation</strong></td>
+<td>Compare with the independent reference; investigate disagreements and screening errors</td>
+<td>Evaluation results and limitations</td>
+</tr>
+<tr>
+<td><strong>5 · Gene-specific literature search</strong></td>
+<td>Apply the evaluated screening workflow to your assigned gene; check candidates and audit rejections</td>
+<td>Search record and candidate reading list</td>
+</tr>
+<tr>
+<td><strong>6 · Full-text agent evaluation</strong></td>
+<td>Independently extract information from <strong>three papers per student</strong>, lock the answers, then run and evaluate the extraction agent</td>
+<td>Separate human reference, agent output and error comparison</td>
+</tr>
+<tr>
+<td><strong>7 · Full-text tagging analysis</strong></td>
+<td>Apply the evaluated workflow to relevant papers and verify its claims</td>
+<td>Evidence for the tagging design, with sources and uncertainties</td>
 </tr>
 </tbody>
 </table>
-<h2 id="what-to-do-first">What to do first<a class="headerlink" href="#what-to-do-first" title="Permanent link">&para;</a></h2>
+<p>Parts 1 and 2 start now. Detailed task instructions for Parts 3–7 follow at
+supervision; the table is the roadmap, not an instruction to start all seven.</p>
+<h2 id="timing-and-checkpoints">Timing and checkpoints<a class="headerlink" href="#timing-and-checkpoints" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -1332,79 +1371,81 @@ making plausible guesses. Both tracks feed your later tagging design.</p>
 <tbody>
 <tr>
 <td><strong>27 Oct–10 Nov</strong></td>
-<td>Read about your protein; practise annotation; annotate the fifty without AI</td>
-<td>Discuss a practice uncertainty before starting the assigned set</td>
+<td>Parts 1 and 2 in parallel: background reading, practice, then independent abstract classification</td>
+<td>Agree practice conventions before the assigned set</td>
 </tr>
 <tr>
 <td><strong>10 Nov, before the agent session</strong></td>
-<td>Submit the abstract-only JSON</td>
+<td>Submit Part 2</td>
 <td>Confirm receipt and locking before opening full texts or model answers</td>
 </tr>
 <tr>
-<td><strong>10 Nov session</strong></td>
-<td>Receive your Claude account; set up and try the agent with guidance</td>
-<td>Keep a log of the run and anything you had to fix</td>
+<td><strong>10 Nov session onward</strong></td>
+<td>Part 3: receive your Claude account and run the abstract classifier</td>
+<td>Save predictions and run details</td>
 </tr>
 <tr>
 <td><strong>10–17 Nov</strong></td>
-<td>Finish your protein argument; learn the agent workflow</td>
-<td>Email the page and slides by 17 Nov</td>
+<td>Finish Part 1; work on Parts 3–4 with guidance</td>
+<td>Submit the introduction by 17 Nov; compare classifier results before applying the workflow</td>
 </tr>
 <tr>
-<td><strong>From 17 Nov</strong></td>
-<td>Apply the evaluated workflow to your gene; investigate candidate full texts</td>
-<td>Agree full-text reference work, output format and deadline at supervision</td>
+<td><strong>From 17 Nov, after Part 4</strong></td>
+<td>Part 5: gene-specific search and screening</td>
+<td>Agree the candidate list and three papers for Part 6</td>
+</tr>
+<tr>
+<td><strong>After paper selection; date to be agreed</strong></td>
+<td>Part 6: three-paper full-text evaluation</td>
+<td>Lock independent extraction answers before seeing the extraction agent's output</td>
+</tr>
+<tr>
+<td><strong>After Part 6; date to be agreed</strong></td>
+<td>Part 7: verified gene-specific full-text analysis</td>
+<td>Assemble evidence and limitations for the tagging design</td>
 </tr>
 </tbody>
 </table>
-<p>Reading and manual annotation run in parallel before 10 November. Agent work
-starts afterwards—not alongside the independent abstract annotations.</p>
-<h2 id="how-the-parts-fit-together">How the parts fit together<a class="headerlink" href="#how-the-parts-fit-together" title="Permanent link">&para;</a></h2>
-<p>Part 1 asks whether the experiment is justified. Part 2 finds and checks
-previous tagging evidence. Part 3 adds structural and sequence constraints.
-Together they inform the design; none alone guarantees that a tag will work.</p>
-<p>The fifty abstracts evaluate a method; they are not necessarily about your
-protein. You then use that method in your gene-specific search.
+<p>The later rows specify order, <strong>not new submission deadlines</strong>. Agree the
+Part 6 and 7 dates at supervision, allowing for Phase 2 starting on 24 November.
+See the <a href="../../assessment/timeline/">course timeline</a>.</p>
+<h2 id="keep-the-full-text-work-bounded">Keep the full-text work bounded<a class="headerlink" href="#keep-the-full-text-work-bounded" title="Permanent link">&para;</a></h2>
+<p>Part 6 uses <strong>three papers per student</strong>, not ten. Agree the papers with your
+supervisor and use a shared worked example before independent extraction.
+Record only:</p>
+<ul>
+<li>Protein and tag used.</li>
+<li>Native-locus or ectopic expression strategy.</li>
+<li>Tag position.</li>
+<li>The experiment, if any, supporting retained protein function.</li>
+<li>The location of supporting information in the paper or supplement.</li>
+</ul>
+<p>Do this without AI or access to the extraction agent's answers. Keep these
+records separate from the locked abstract classifications. The full-text
+recording format and deadline will be confirmed before the task begins.</p>
+<p>This is a small evaluation pilot, not a comprehensive performance benchmark.
+Where suitable, the same papers can contribute to Part 7—do not repeat the
+extraction. If your gene has no suitable precedent, your supervisor supplies
+practice papers for Part 6.</p>
+<p>Part 7 has <strong>no fixed paper quota</strong>. Analyse the relevant evidence found;
+“no precedent found” is not evidence that tagging will fail.</p>
+<h2 id="how-this-informs-the-design">How this informs the design<a class="headerlink" href="#how-this-informs-the-design" title="Permanent link">&para;</a></h2>
+<p>Part 1 explains why the experiment is useful. Parts 2–7 establish what the
+literature workflow can do and what prior tagging experiments support.
+The fifty abstracts test a method; they need not concern your assigned gene.
 <a href="why-evaluate/">Why evaluate first?</a></p>
-<h2 id="what-is-due-and-when">What is due, and when<a class="headerlink" href="#what-is-due-and-when" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>10 Nov, before the agent session</strong></td>
-<td>Your 50 annotated abstracts, as a JSON file sent to your supervisor. Keep a copy; confirm receipt and locking</td>
-</tr>
-<tr>
-<td><strong>17 Nov</strong></td>
-<td>Your protein introduction — one page plus one or two slides, emailed</td>
-</tr>
-<tr>
-<td><strong>To be confirmed at supervision</strong></td>
-<td>Separate manual full-text reference annotations, locked before comparing Agent 2; scope and recording format also to be agreed</td>
-</tr>
-</tbody>
-</table>
-<p>The models are run against your annotations only once they are in.</p>
-<p>Your annotations are due <strong>10 November</strong>, the day Claude accounts are
-issued — so the 50 abstracts in <a href="2-evaluation/">part 2</a> are done before you
-have an agent. After that you are expected to use it. See
-<a href="../../course/your-claude-account/">Your Claude account</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Part 3 is not yours to do</p>
-<p>Mapping every modification and isoform across a gene is a database job, not
-a judgement one, and it would eat your term. We run it and hand you the
-result. You still have to <em>interpret</em> it in
-<a href="../2-cloning/">phase 2</a>, which is the part that matters.</p>
-</div>
+<p>Sequence, isoform, modification and structural information is supplied
+separately for <a href="../2-cloning/">Phase 2 · Cloning</a>. It is <strong>not Part 3
+of this roadmap</strong>. You interpret that information alongside the literature;
+neither alone guarantees a successful tag.</p>
 <h2 id="changes">Changes<a class="headerlink" href="#changes" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>24 October 2026:</strong> Added the two-agent workflow diagram; clarified the schedule, practice checkpoint and abstract-locking gate. Distinguished the evaluation set from the gene search and flagged full-text arrangements for confirmation.</li>
-<li><strong>24 October 2026 (parallel-track revision):</strong> Split the diagram into gene-background and agent-evaluation tracks, with their outputs and deadlines. Clarified that Part 1 is not a prerequisite for starting Part 2.</li>
+<li><strong>24 October 2026:</strong> Introduced parallel background and literature tracks,
+  independent-reference checkpoints and separate abstract/full-text evaluation.</li>
+<li><strong>26 October 2026:</strong> Expanded Phase 1 into seven parts. Set the full-text
+  evaluation workload to three papers per student; added the sequence to the
+  schedule without creating unconfirmed deadlines. Moved the former “Part 3”
+  sequence/structure description out of the Phase 1 numbering.</li>
 </ul>
 
 
