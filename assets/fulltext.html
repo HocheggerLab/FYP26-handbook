@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FYP26 · Full-text extraction</title>
+<style>
+:root{font-family:system-ui,sans-serif;color:#18232c;background:#f3f5f7;line-height:1.5}body{max-width:1000px;margin:auto;padding:1rem}h1{font-size:1.7rem}h2{font-size:1.3rem}fieldset,article,.panel{background:white;border:1px solid #c4cdd4;border-radius:.4rem;padding:1rem;margin:1rem 0}legend{font-weight:bold}label{display:block;font-weight:600;margin-top:.7rem}input,select,textarea,button{font:inherit;box-sizing:border-box}input,select,textarea{width:100%;padding:.5rem;border:1px solid #687984;border-radius:.2rem;background:white;color:#18232c}textarea{min-height:5rem;resize:vertical}button{padding:.5rem .8rem;cursor:pointer;background:#174d69;color:white;border:0;border-radius:.25rem;margin:.25rem}button.secondary{background:#465760}small,.help{color:#455663}.help{margin:.3rem 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}.toolbar{position:sticky;top:0;background:#f3f5f7;border-bottom:1px solid #c4cdd4;padding:.5rem;z-index:2}.notice{border-left:4px solid #a56a00;padding:.5rem 1rem;background:#fff5dd}#message{white-space:pre-wrap;max-height:18rem;overflow:auto}#message.error{color:#982222}a{color:#145775}[hidden]{display:none!important}summary{cursor:pointer;font-weight:600}@media print{.toolbar,button,#restore-file{display:none}body{max-width:none}fieldset{break-inside:avoid}}
+</style>
+<script src="fulltext-v2-core.js" defer></script><script src="fulltext-core.js" defer></script><script src="fulltext-app.js" defer></script>
+</head>
+<body>
+<h1>Full-text extraction</h1>
+<p>One paper per file. Add each protein, then add the tags tested on that protein. Each tag has its own methods and results.</p>
+<p><a href="../phases/1-literature/3-fulltext-analysis/">Part 3 instructions</a> · <a href="fulltext-v3.schema.json">JSON schema (v3)</a></p>
+<p class="notice"><strong>Independent reference work:</strong> do not use AI to interpret or check your evaluation papers before the reference is locked. This form contains no model answers and sends no records to a server.</p>
+<div class="toolbar">
+<button id="draft" type="button">Export draft</button><button id="final" type="button">Check &amp; export completed record</button><button id="restore" class="secondary" type="button">Restore JSON</button><button id="new" class="secondary" type="button">New paper</button>
+<input id="restore-file" type="file" accept=".json,application/json" hidden>
+<div id="save-state" role="status">Loading…</div>
+</div>
+<div id="message" role="status" aria-live="polite"></div>
+<details class="panel"><summary>Answer statuses and evidence</summary>
+<p><strong>Answered:</strong> a supported finding, including an inconclusive experimental result. Provide a short quote or faithful summary and an exact source location.</p>
+<p><strong>Not reported:</strong> you checked the accessible material but could not find the information. <strong>Not tested:</strong> the study explicitly did not perform the assessment. <strong>Unclear:</strong> ambiguous or conflicting evidence. <strong>Source unavailable:</strong> you could not obtain the relevant material. <strong>Not applicable:</strong> the question does not apply.</p>
+<p>For an unanswered status, explain why and where you checked. For cited sources, name the earlier paper and location; do not present a citation as evidence you have read. Missing supplements are not evidence that an experiment was not performed.</p>
+<p>Local saving uses this browser and website address only. Export a draft after each session and before starting another paper. A completed export passes form checks; it is <strong>not</strong> an adjudicated or locked reference. Keep a separate copy of your original submission.</p>
+</details>
+<main id="form"></main>
+<button id="add" type="button">Add protein</button>
+<div class="panel">
+<p>Finished listing the proteins and tags? Next, record the methods and results for each tagged version.</p>
+<button id="next-details" type="button">Next: methods, function and depletion →</button>
+</div>
+<p><small>Full-text v3 is separate from the abstract tool and the earlier draft full-text v1 schema. Full-text v2 backups can be restored as drafts without losing answers; each old record becomes a separate protein entry. Downloads are your backups; clearing browser data removes local records.</small></p>
+</body></html>

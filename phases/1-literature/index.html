@@ -674,17 +674,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#changes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -757,14 +746,42 @@
   
   
     <li class="md-nav__item">
-      <a href="3-agent-setup/" class="md-nav__link">
+      <a href="3-fulltext-analysis/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Part 3 · Getting ready to use the agents
+    Part 3 · Full-text analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="4-agent-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 · Getting ready to use the agents
   
 
     
@@ -793,6 +810,34 @@
     
   
     Annotation tool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../assets/fulltext.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full-text extraction tool
   
 
     
@@ -849,6 +894,62 @@
     
   
     Examples — solutions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fulltext-example-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples — full text 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="fulltext-example-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples — full text 2
   
 
     
@@ -1223,17 +1324,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#changes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Changes
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1273,18 +1363,19 @@ for Tuesday meetings and preparation.</p>
     subgraph Literature["Parts 2–7 · Literature workflow"]
         direction TB
         E["2 · Classify 50 abstracts independently&lt;br/&gt;Submit and lock by 10 November"]
-        E --&gt; F["6 · Prepare the full-text reference&lt;br/&gt;Three papers independently&lt;br/&gt;10–17 November"]
+        F["3 · Prepare the full-text reference&lt;br/&gt;Three separate papers independently&lt;br/&gt;3–17 November"]
+        E --&gt; G
         F --&gt; G["Combine human references · 17 November&lt;br/&gt;Keep originals; adjudicate and lock"]
-        G --&gt; H["3, 4 and 6 · Run and evaluate agents&lt;br/&gt;17–24 November"]
+        G --&gt; H["4 and 5 · Run and evaluate agents&lt;br/&gt;17–24 November"]
         H --&gt; I["Review performance · 24 November"]
-        I --&gt; J["5 and 7 · Search your gene's literature&lt;br/&gt;and verify full-text evidence"]
+        I --&gt; J["6 and 7 · Search your gene's literature&lt;br/&gt;and verify full-text evidence"]
         J --&gt; K["Combine with supplied isoforms&lt;br/&gt;and structures for cloning · 1 December"]
     end</code></pre>
 </div>
 </div>
 <h2 id="the-seven-parts">The seven parts<a class="headerlink" href="#the-seven-parts" title="Permanent link">&para;</a></h2>
 <p>Part numbers identify tasks, <strong>not seven consecutive weeks</strong>. In particular,
-Part 6's independent reference work starts on 10 November, so both abstract
+Part 3's independent reference work starts on 3 November, so both abstract
 and full-text agents can be evaluated during 17–24 November.</p>
 <table>
 <thead>
@@ -1306,24 +1397,24 @@ and full-text agents can be evaluated during 17–24 November.</p>
 <td>Submitted, locked JSON <strong>before the 10 November meeting</strong></td>
 </tr>
 <tr>
-<td><strong>3 · Literature classification with an agent</strong></td>
-<td><a href="3-agent-setup/">Prepare VS Code and uv</a> before 3 November; later run the classifier on the same abstracts after reference locking</td>
+<td><strong>3 · Full-text analysis</strong></td>
+<td><a href="3-fulltext-analysis/">Independently extract tagging evidence from three papers</a></td>
+<td>Human records <strong>3–17 November</strong>; combined reference locked on <strong>17 November</strong></td>
+</tr>
+<tr>
+<td><strong>4 · Getting ready to use the agents</strong></td>
+<td><a href="4-agent-setup/">Prepare VS Code and uv</a> before 3 November; run the agents only after reference locking</td>
 <td>Working setup first; saved predictions and run details, <strong>17–24 November</strong></td>
 </tr>
 <tr>
-<td><strong>4 · Agent evaluation</strong></td>
-<td>Compare with the independent reference; investigate disagreements and screening errors</td>
+<td><strong>5 · Agent evaluation</strong></td>
+<td>Compare abstract classification and full-text extraction with the independent references; investigate errors</td>
 <td>Results and limitations for review on <strong>24 November</strong></td>
 </tr>
 <tr>
-<td><strong>5 · Gene-specific literature search</strong></td>
+<td><strong>6 · Gene-specific literature search</strong></td>
 <td>Apply the reviewed screening workflow to your gene; check candidates and audit rejections</td>
 <td>Search record and candidate reading list, <strong>24 November–1 December</strong>, subject to approval at the review</td>
-</tr>
-<tr>
-<td><strong>6 · Full-text agent evaluation</strong></td>
-<td>Independently extract <strong>three papers</strong>, then compare the extraction agent against the locked reference</td>
-<td>Human records <strong>10–17 November</strong>; combined reference on <strong>17 November</strong>; evaluation runs <strong>17–24 November</strong></td>
 </tr>
 <tr>
 <td><strong>7 · Full-text tagging analysis</strong></td>
@@ -1334,7 +1425,7 @@ and full-text agents can be evaluated during 17–24 November.</p>
 </table>
 <h2 id="independent-full-text-reference-three-papers-each">Independent full-text reference · Three papers each<a class="headerlink" href="#independent-full-text-reference-three-papers-each" title="Permanent link">&para;</a></h2>
 <p>Practise the recording format on separate examples on <strong>3 November</strong>.
-On <strong>10 November</strong>, your supervisor assigns <strong>three distinct papers per
+On <strong>3 November</strong>, your supervisor assigns <strong>three distinct papers per
 student, with no shared evaluation paper</strong> (15 papers across the group). Complete the independent extraction before the <strong>17 November</strong> meeting.
 Record:</p>
 <ul>
@@ -1362,7 +1453,7 @@ planning session</strong>. These data are supplied; you do not need to build the
 underlying database yourself.</p>
 <p>Suitable evaluation papers can also contribute to the gene-specific analysis;
 do not repeat the extraction. If your gene has no suitable precedent, your
-supervisor supplies practice papers for Part 6. Part 7 has <strong>no fixed paper
+supervisor supplies practice papers for Part 3. Part 7 has <strong>no fixed paper
 quota</strong>: analyse the relevant evidence found. “No precedent found” is not
 evidence that tagging will fail.</p>
 <h2 id="how-this-informs-the-design">How this informs the design<a class="headerlink" href="#how-this-informs-the-design" title="Permanent link">&para;</a></h2>
@@ -1374,23 +1465,6 @@ fifty abstracts test a method; they need not concern your assigned gene.
 <a href="../2-cloning/">Phase 2 · Cloning</a>. No single source guarantees that a
 tag will work. Bring the evidence and remaining uncertainties to the design
 session, rather than an unverified agent recommendation.</p>
-<h2 id="changes">Changes<a class="headerlink" href="#changes" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p><strong>26 October 2026 (setup):</strong> Added the Part 3 VS Code/uv preparation resource for 3 November. Confirmed three distinct full-text papers per student, with no shared evaluation paper; paper selection follows separately.</p>
-</li>
-<li>
-<p><strong>26 October 2026 (combined introduction):</strong> Protein work now contributes to one after-Christmas background/protein presentation, not a separate slide task. The 3 November session is for abstract questions and full-text practice outside the evaluation sets.</p>
-</li>
-<li>
-<p><strong>24 October 2026:</strong> Introduced parallel background and evaluation tracks.</p>
-</li>
-<li><strong>26 October 2026:</strong> Established the seven-part roadmap and three-paper
-  full-text evaluation. Updated its timing: independent full-text work starts
-  10 November, combined references on 17 November, performance review on
-  24 November, and gene-specific evidence plus isoforms/structures before
-  cloning planning on 1 December. Protein introduction moved to after Christmas.</li>
-</ul>
 
 
 
@@ -1411,12 +1485,6 @@ session, rather than an unverified agent recommendation.</p>
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
-          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Back to top
-</button>
-        
       </main>
       
         <footer class="md-footer">
@@ -1425,11 +1493,6 @@ session, rather than an unverified agent recommendation.</p>
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
   
-  
-    Made with
-    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-      Material for MkDocs
-    </a>
   
 </div>
       
@@ -1446,7 +1509,7 @@ session, rather than an unverified agent recommendation.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "navigation.instant", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.instant", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
