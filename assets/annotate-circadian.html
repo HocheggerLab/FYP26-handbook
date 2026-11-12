@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FYP26 — circadian abstract classification</title>
+<style>
+body{max-width:1100px;margin:auto;padding:1rem;font:17px/1.6 system-ui;color:#222c33;background:#fafaf8}h1{color:#35666b;font-size:1.5rem}header,.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}main{display:grid;grid-template-columns:1fr 1fr;gap:2rem}section{padding:1rem;background:white;border:1px solid #d7dede;border-radius:8px}label{display:block;margin-top:1rem;font-weight:bold}select,button{font:inherit;padding:.4rem;border:1px solid #aaa;border-radius:4px}button{cursor:pointer}select{width:100%}.hidden{display:none}#abstract{white-space:pre-wrap}#message{color:#923018}table{border-collapse:collapse}td,th{border:1px solid #ccc;padding:.4rem;text-align:left}@media(max-width:800px){main{grid-template-columns:1fr}}
+</style></head><body>
+<h1>FYP26 — circadian clock and cancer: abstract classification</h1>
+<p>Classify from the supplied title and abstract only. Do not use AI or open the paper. Export after every session: browser storage is not a backup.</p>
+<details open><summary><strong>Instructions and allowed options</strong></summary>
+<table><tr><th>Question</th><th>Options</th></tr>
+<tr><td>1 · Circadian</td><td>The abstract reports research on the circadian clock, circadian rhythms or circadian disruption (for example shift work or light at night).</td></tr>
+<tr><td>2 · Cancer</td><td>The abstract reports research on cancer or tumours.</td></tr>
+<tr><td>3 · Breast cancer</td><td>The abstract reports research on breast cancer specifically.</td></tr>
+<tr><td>4 · Clock gene</td><td>The abstract reports results on at least one named core clock gene or protein: BMAL1 (ARNTL), CLOCK, PER1–3, CRY1–2, NR1D1–2 (REV-ERB).</td></tr>
+<tr><td>5 · Evidence</td><td>The main kind of evidence reported.</td></tr>
+<tr><td>6 · Expression data</td><td>The abstract reports gene or protein expression measured in human tumour or patient samples.</td></tr>
+<tr><td>7 · Full text</td><td>Take forward: the abstract reports original results that link at least one named core clock gene or protein to cancer (tumour growth or cancer cell behaviour, expression in tumours, patient outcome, or treatment response).</td></tr></table>
+<p>Questions 1–4, 6 and 7: <strong>yes</strong> · <strong>no</strong> · <strong>unsure</strong> (the abstract does not settle it). Answer every question for every abstract, including the ones that are not about the clock or cancer.</p>
+<p>Evidence: <strong>patient_samples_or_cohort</strong> (human tissue, tumours or patient cohorts) · <strong>cell_lines</strong> · <strong>animal_model</strong> · <strong>epidemiology</strong> (population studies, such as shift work and cancer risk) · <strong>review</strong> · <strong>not_stated</strong>. If several apply, choose the one the conclusions rest on.</p>
+<p>Full text: <strong>yes</strong> and <strong>unsure</strong> both queue the paper for full-text reading. Reviews and commentaries are <strong>no</strong>; so is shift-work epidemiology that names no clock gene. Any cancer counts, not only breast.</p>
+<p>An "epigenetic clock" or "mitotic clock" is not the circadian clock. Melatonin counts as circadian only when the abstract frames it as a rhythm or clock signal.</p>
+</details>
+<div id="start"><label for="file">Load CB1_items.json</label><input type="file" id="file" accept=".json"><p>To resume a backup, first load the same items file, then use Restore saved annotations.</p></div>
+<header id="bar" class="hidden"><strong id="who"></strong><span id="count"></span><button id="prev">← Prev</button><button id="next">Next →</button><button id="jump">Next unfinished</button><button id="restore">Restore saved annotations</button><input id="restoreFile" type="file" accept=".json" class="hidden" aria-label="Saved annotations JSON"><button id="export">Export</button></header>
+<p id="message" role="status"></p>
+<main id="app" class="hidden"><section><p id="src"></p><h2 id="title"></h2><div id="abstract"></div></section><section>
+<label for="circadian">1 · Circadian</label><select id="circadian"></select>
+<label for="cancer">2 · Cancer</label><select id="cancer"></select>
+<label for="breast">3 · Breast cancer</label><select id="breast"></select>
+<label for="clock_gene">4 · Clock gene</label><select id="clock_gene"></select>
+<label for="evidence">5 · Evidence</label><select id="evidence"></select>
+<label for="expression_data">6 · Expression data</label><select id="expression_data"></select>
+<label for="full_text">7 · Full text: take this paper forward?</label><select id="full_text"></select>
+<p id="route"></p></section></main>
+<script>
+const YNU=['yes','no','unsure'];
+const ENUMS = {circadian:YNU,cancer:YNU,breast:YNU,clock_gene:YNU,evidence:['patient_samples_or_cohort','cell_lines','animal_model','epidemiology','review','not_stated'],expression_data:YNU,full_text:YNU};
+const FIELDS = Object.keys(ENUMS), SCHEMA='circadian-1';
+const $ = id => document.getElementById(id);
+let items=[], recs={}, who='', KEY='', i=0;
+for(const [f,options] of Object.entries(ENUMS)) $(f).innerHTML='<option value="">— choose —</option>'+options.map(v=>`<option>${v}</option>`).join('');
+function done(id){const r=recs[id];return !!r && FIELDS.every(f=>ENUMS[f].includes(r[f]));}
+function render(){
+ const it=items[i],r=recs[it.item_id]||{};
+ $('who').textContent=who+' · abstract pass';
+ $('count').textContent=`${i+1}/${items.length} · ${items.filter(it=>done(it.item_id)).length}/${items.length} complete`;
+ $('src').textContent=`${it.journal||'—'} · ${it.year||'—'} · PMID ${it.pmid||'—'} · ${it.item_id}`;
+ $('title').textContent=it.title; $('abstract').textContent=it.abstract;
+ for(const f of FIELDS) $(f).value=r[f]||'';
+ $('route').textContent=r.full_text==='no'?'Not taken forward.':['yes','unsure'].includes(r.full_text)?'Queued for full-text reading.':'';
+ $('prev').disabled=i===0; $('next').disabled=i===items.length-1;
+}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(recs));}catch(e){$('message').textContent='Browser saving failed. Export now to keep your work: '+e.message;}}
+function save(){
+ const r={item_id:items[i].item_id,annotator:who,annotator_role:'student',stage:'abstract',schema_version:SCHEMA,annotated_at:new Date().toISOString()};
+ for(const f of FIELDS) if($(f).value) r[f]=$(f).value;
+ recs[r.item_id]=r; $('message').textContent='';persist();render();
+}
+function restoredRecords(data){
+ if(!Array.isArray(data)||!data.length) throw Error('Choose a non-empty annotations export.');
+ const ids=new Set(items.map(it=>it.item_id)),next=Object.create(null);
+ const allowed=new Set([...FIELDS,'item_id','annotator','annotator_role','stage','schema_version','annotated_at']);
+ for(const r of data){
+  if(!r||typeof r!=='object'||Array.isArray(r)||!ids.has(r.item_id)) throw Error('Item outside the loaded set.');
+  if(Object.hasOwn(next,r.item_id)) throw Error('Duplicate item ID.');
+  if(r.schema_version!==SCHEMA) throw Error('This export is from a different question set.');
+  if(r.annotator!==who||r.annotator_role!=='student'||r.stage!=='abstract') throw Error('Wrong student set or pass.');
+  if(typeof r.annotated_at!=='string'||!Number.isFinite(Date.parse(r.annotated_at))) throw Error('Invalid annotation timestamp.');
+  if(Object.keys(r).some(k=>!allowed.has(k))) throw Error('Unexpected fields in this classification file.');
+  for(const f of FIELDS) if(r[f]!==undefined&&!ENUMS[f].includes(r[f])) throw Error('Invalid '+f);
+  next[r.item_id]={...r};
+ }
+ return next;
+}
+$('file').onchange=async e=>{
+ const f=e.target.files[0];if(!f)return;
+ try{
+  const data=JSON.parse(await f.text()), match=f.name.match(/^(CB\d+)_items\.json$/);
+  if(!match||!Array.isArray(data)||!data.length||data.some(r=>!r||typeof r.item_id!=='string'||typeof r.title!=='string'||typeof r.abstract!=='string')||new Set(data.map(r=>r.item_id)).size!==data.length) throw Error('Choose CB1_items.json.');
+  items=data;who=match[1];KEY='fyp26-circadian-1-abstract-'+who;recs={};
+  $('message').textContent='';
+  try{const stored=localStorage.getItem(KEY);if(stored)recs=restoredRecords(Object.values(JSON.parse(stored)));}catch(err){$('message').textContent='Could not resume browser data. Restore an exported backup. '+err.message;}
+  $('start').classList.add('hidden');$('bar').classList.remove('hidden');$('app').classList.remove('hidden');
+  i=items.findIndex(it=>!done(it.item_id));if(i<0)i=0;render();
+ }catch(err){$('message').textContent=err.message;}
+};
+$('app').addEventListener('change',save);
+$('prev').onclick=()=>{if(i>0){i--;render();}};
+$('next').onclick=()=>{if(i<items.length-1){i++;render();}};
+$('jump').onclick=()=>{const n=items.findIndex((it,k)=>k>i&&!done(it.item_id));const m=n<0?items.findIndex(it=>!done(it.item_id)):n;if(m<0){$('message').textContent='All items complete.';return;}i=m;render();};
+$('restore').onclick=()=>$('restoreFile').click();
+$('restoreFile').onchange=async e=>{
+ const file=e.target.files[0];if(!file)return;
+ try{const next=restoredRecords(JSON.parse(await file.text()));
+  if(!confirm(`Restore ${Object.keys(next).length} of ${items.length} items for ${who}? This REPLACES current answers, including answers absent from the backup. Export current work first if needed.`))return;
+  localStorage.setItem(KEY,JSON.stringify(next));recs=next;
+  i=items.findIndex(it=>!done(it.item_id));if(i<0)i=0;render();$('message').textContent='Saved annotations restored.';
+ }catch(err){$('message').textContent='Could not restore: '+err.message+' Current answers were not replaced.';}finally{e.target.value='';}
+};
+function exportRecords(){return items.map(it=>recs[it.item_id]).filter(Boolean);}
+$('export').onclick=()=>{
+ const out=exportRecords(),complete=items.filter(it=>done(it.item_id)).length;
+ if(complete<items.length&&!confirm(`Only ${complete}/${items.length} items are complete. Export a progress backup anyway?`))return;
+ const url=URL.createObjectURL(new Blob([JSON.stringify(out,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`${who}_abstract_circadian1_${new Date().toISOString().slice(0,10)}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ $('message').textContent=`Exported ${out.length} records; ${complete}/${items.length} complete. Keep your items file too.`;
+};
+window.onbeforeunload=()=>items.length?'':undefined;
+</script></body></html>
