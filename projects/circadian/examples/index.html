@@ -1,0 +1,2766 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Final year project handbook — AI agents in the biosciences">
+      
+      
+      
+      
+        <link rel="prev" href="../1-abstracts/">
+      
+      
+        <link rel="next" href="../../../assets/annotate-circadian.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Examples with solutions - FYP26 Handbook</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#examples-twelve-abstracts-with-solutions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="FYP26 Handbook" class="md-header__button md-logo" aria-label="FYP26 Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FYP26 Handbook
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Examples with solutions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="FYP26 Handbook" class="md-nav__button md-logo" aria-label="FYP26 Handbook" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    FYP26 Handbook
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start here
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assessment/timeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The proteins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    The proteins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../genes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../genes/ppp1cc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPP1CC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../genes/ppp2ca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPP2CA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../genes/ppp2r2a/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPP2R2A
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../genes/ppp4c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPP4C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../genes/ppp6c/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PPP6C
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../genes/brd4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BRD4
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 0 · Background
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 0 · Background
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/0-presentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What to do
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course/what-is-an-agent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    What an AI agent is
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course/evaluating-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluating agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course/degraders-vs-degrons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Degrons and degraders
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course/gene-targeting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Gene targeting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/0-presentation/reading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reading
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 1 · Literature
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Phase 1 · Literature
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/1-background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 · Your protein
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/2-evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 2 · Tagging precedent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/3-fulltext-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 3 · Full-text analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/4-agent-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 4 · Getting ready to use the agents
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://hocheggerlab.github.io/FYP26-handbook/assets/annotate.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annotation tool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assets/fulltext.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Full-text extraction tool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/worked-examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples — abstracts and questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/example-solutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples — solutions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/fulltext-example-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples — full text 1
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/fulltext-example-1-solutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples — full text 1 solution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/fulltext-example-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples — full text 2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/fulltext-example-2-solutions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples — full text 2 solution
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/1-literature/why-evaluate/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Why evaluate first?
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/2-cloning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 2 · Cloning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../phases/3-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Phase 3 · Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Circadian clock project
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Circadian clock project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-abstracts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Part 1 · Abstract classification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples with solutions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples with solutions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 7
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 8
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 9
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 10
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 11
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 12
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compare
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../assets/annotate-circadian.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annotation tool
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course policy
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Course policy
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course/how-you-are-marked/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How you are marked
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course/your-claude-account/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Your Claude account
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../course/agent-ground-rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ground rules for the agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    For supervisors
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_10">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    For supervisors
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../meta/style/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing style contract
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 1
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 3
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 4
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 5
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 6
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 7
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 8
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 9
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 10
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 11
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#abstract-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Abstract 12
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compare
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="examples-twelve-abstracts-with-solutions">Examples · Twelve abstracts with solutions<a class="headerlink" href="#examples-twelve-abstracts-with-solutions" title="Permanent link">&para;</a></h1>
+<p>Classify these twelve before you start your 300. Answer all seven questions
+for each, write down your answers, then open the solution. They are real
+abstracts, separate from your set. The questions and rules are on the
+<a href="../1-abstracts/#the-seven-questions">Part 1 page</a>.</p>
+<p>A grid to copy:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>4</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>5</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>6</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>7</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>10</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>11</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="abstract-1">Abstract 1<a class="headerlink" href="#abstract-1" title="Permanent link">&para;</a></h2>
+<p><strong>Loss of circadian clock gene expression is associated with tumor
+progression in breast cancer.</strong> Cell Cycle, 2014. PMID <strong>25485508</strong>.</p>
+<blockquote>
+<p>Several studies suggest a link between circadian rhythm disturbances and tumorigenesis. However, the association between circadian clock genes and prognosis in breast cancer has not been systematically studied. Therefore, we examined the expression of 17 clock components in tumors from 766 node-negative breast cancer patients that were untreated in both neoadjuvant and adjuvant settings. In addition, their association with metastasis-free survival (MFS) and correlation to clinicopathological parameters were investigated. Aiming to estimate functionality of the clockwork, we studied clock gene expression relationships by correlation analysis. Higher expression of several clock genes (e.g., CLOCK, PER1, PER2, PER3, CRY2, NPAS2 and RORC) was found to be associated with longer MFS in univariate Cox regression analyses (HR&lt;1 and FDR-adjusted P &lt; 0.05). Stratification according to molecular subtype revealed prognostic relevance for PER1, PER3, CRY2 and NFIL3 in the ER+/HER2- subgroup, CLOCK and NPAS2 in the ER-/HER2- subtype, and ARNTL2 in HER2+ breast cancer. In the multivariate Cox model, only PER3 (HR = 0.66; P = 0.016) and RORC (HR = 0.42; P = 0.003) were found to be associated with survival outcome independent of established clinicopathological parameters. Pairwise correlations between functionally-related clock genes (e.g., PER2-PER3 and CRY2-PER3) were stronger in ER+, HER2- and low-grade carcinomas; whereas, weaker correlation coefficients were observed in ER- and HER2+ tumors, high-grade tumors and tumors that progressed to metastatic disease. In conclusion, loss of clock genes is associated with worse prognosis in breast cancer. Coordinated co-expression of clock genes, indicative of a functional circadian clock, is maintained in ER+, HER2-, low grade and non-metastasizing tumors but is compromised in more aggressive carcinomas.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>patient_samples_or_cohort</td>
+<td>yes</td>
+<td><strong>yes</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The clear case, and the kind of paper the project is looking for.
+Clock gene expression ("CLOCK, PER1, PER2, PER3, CRY2") is measured "in
+tumors from 766 node-negative breast cancer patients" and linked to
+metastasis-free survival. Every question is settled by the abstract.</p>
+</details>
+<h2 id="abstract-2">Abstract 2<a class="headerlink" href="#abstract-2" title="Permanent link">&para;</a></h2>
+<p><strong>Circadian Clock Gene bmal1 Acts as a Tumor Suppressor Gene in a Mice
+Model of Human Glioblastoma.</strong> Mol Neurobiol, 2024. PMID <strong>38180613</strong>.</p>
+<blockquote>
+<p>Glioblastomas derived from malignant astrocytes are the most common primary tumors of the central nervous system in humans, exhibiting very bad prognosis. Treatment with surgery, radiotherapy, and chemotherapy (mainly using temozolomide), generates as much one-year survival. The circadian clock controls different aspects of tumor development, and its role in GBM is beginning to be explored. Here, the role of the canonic circadian clock gene bmal1 was studied in vivo in a nude mice model bearing human GBMs from LN229 cells xenografted orthotopically in the dorsal striatum. For that aim, a bmal1 knock-down was generated in LN229 cells by CRISPR/Cas9 gene editing tool, and tumor progression was followed in male mice by measuring survival, tumor growth, cell proliferation and prognosis with CD44 marker, as well as astrocyte activation in the tumor microenvironment with GFAP and nestin markers. Disruption of bmal1 in the tumor decreased survival, increased tumor growth and CD44 expression, worsened motor performance, as well as increased GFAP expression in astrocytes at tumor microenvironment. In addition, survival and tumor progression was not affected in mice bearing LN229 wild type GBM that underwent circadian disruption by constant light, as compared to mice synchronized to 12:12 light-dark cycles. These results consistently demonstrate in an in vivo orthotopic model of human GBM, that bmal1 has a key role as a tumor suppressor gene regulating GBM progression.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>yes</td>
+<td>animal_model</td>
+<td>no</td>
+<td><strong>yes</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Full text: yes.</strong> Original results link BMAL1 to tumour growth.
+  Any cancer counts, not only breast; question 3 is there to filter
+  later.</li>
+<li><strong>Evidence: animal_model.</strong> The knockdown is made in a cell line, but
+  the conclusions rest on the mice ("in an in vivo orthotopic model").</li>
+<li><strong>Expression: no.</strong> CD44 and GFAP are measured in xenografts grown in
+  mice. Human cells in a mouse are not human tumour or patient samples.</li>
+</ul>
+</details>
+<h2 id="abstract-3">Abstract 3<a class="headerlink" href="#abstract-3" title="Permanent link">&para;</a></h2>
+<p><strong>Rotating Night-Shift Work and the Risk of Breast Cancer in the Nurses'
+Health Studies.</strong> Am J Epidemiol, 2017. PMID <strong>28541391</strong>.</p>
+<blockquote>
+<p>In 2007, the International Agency for Research on Cancer declared shift work that involved circadian disruption to be a "probable" carcinogen (group 2A), noting that human evidence was limited. Using data from 2 prospective cohort studies, the Nurses' Health Study (1988-2012; n = 78,516) and Nurses' Health Study II (1989-2013; n = 114,559), we examined associations between rotating night-shift work and breast cancer risk. In the 2 cohorts, there were a total of 9,541 incident invasive breast malignancies and 24 years of follow-up. In the Nurses' Health Study, women with 30 years or more of shift work did not have a higher risk of breast cancer (hazard ratio (HR) = 0.95, 95% confidence interval (95% CI): 0.77, 1.17; P for trend = 0.63) compared with those who never did shift work, although follow-up occurred primarily after retirement from shift work. Among participants in the Nurses' Health Study II, who were younger than participants in the other cohort, the risk of breast cancer was significantly higher in women with 20 years or more of shift work at baseline, reflecting young-adult exposure (HR = 2.15, 95% CI: 1.23, 3.73; P for trend = 0.23), and was marginally significantly higher for women with 20 years or more of cumulative shift work when we used updated exposure information (HR = 1.40, 95% CI: 1.00, 1.97; P for trend = 0.74). In conclusion, long-term rotating night-shift work was associated with a higher risk of breast cancer, particularly among women who performed shift work during young adulthood. Further studies should explore the role of shift work timing on breast cancer risk.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>epidemiology</td>
+<td>no</td>
+<td><strong>no</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Circadian: yes.</strong> The abstract frames shift work as "circadian
+  disruption".</li>
+<li><strong>Evidence: epidemiology.</strong> It is a population study of cancer risk.
+  Two large cohorts are not patient samples: nothing is measured in
+  tissue.</li>
+<li><strong>Full text: no.</strong> No clock gene is named, so it cannot feed the
+  clock-gene evidence extraction, however relevant it is to the
+  background of your thesis. Keep a note of papers like this for your
+  introduction.</li>
+</ul>
+</details>
+<h2 id="abstract-4">Abstract 4<a class="headerlink" href="#abstract-4" title="Permanent link">&para;</a></h2>
+<p><strong>Susceptibility to hormone-mediated cancer is reflected by different tick
+rates of the epithelial and general epigenetic clock.</strong> Genome Biol, 2022.
+PMID <strong>35189945</strong>.</p>
+<blockquote>
+<p>BACKGROUND: A variety of epigenetic clocks utilizing DNA methylation changes have been developed; these clocks are either tissue-independent or designed to predict chronological age based on blood or saliva samples. Whether discordant tick rates between tissue-specific and general epigenetic clocks play a role in health and disease has not yet been explored.</p>
+<p>RESULTS: Here we analyze 1941 cervical cytology samples, which contain a mixture of hormone-sensitive cervical epithelial cells and immune cells, and develop the WID general clock (Women's IDentification of risk), an epigenetic clock that is shared by epithelial and immune cells and optimized for cervical samples. We then develop the WID epithelial clock and WID immune clock, which define epithelial- and immune-specific clocks, respectively. We find that the WID-relative-epithelial-age (WID-REA), defined as the difference between the epithelial and general clocks, is significantly reduced in cervical samples from pre-menopausal women with breast cancer (OR 2.7, 95% CI 1.28-5.72). We find the same effect in normal breast tissue samples from pre-menopausal women at high risk of breast cancer and show that potential risk reducing anti-progesterone drugs can reverse this. In post-menopausal women, this directionality is reversed. Hormone replacement therapy consistently leads to a significantly lower WID-REA in cancer-free women, but not in post-menopausal women with breast or ovarian cancer.</p>
+<p>CONCLUSIONS: Our findings imply that there are multiple epigenetic clocks, many of which are tissue-specific, and that the differential tick rate between these clocks may be an informative surrogate measure of disease risk.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>patient_samples_or_cohort</td>
+<td>no</td>
+<td><strong>no</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>The trap.</strong> "Clock" appears eleven times, and none of them is the
+  circadian clock. An epigenetic clock estimates age from DNA
+  methylation. This is exactly the abstract a keyword search lets
+  through and a careful reader screens out; it is a good test of the
+  classifier too.</li>
+<li><strong>Expression: no.</strong> DNA methylation is not gene or protein expression.</li>
+<li><strong>Evidence: patient_samples_or_cohort.</strong> The results come from
+  measurements on cervical and breast samples.</li>
+</ul>
+</details>
+<h2 id="abstract-5">Abstract 5<a class="headerlink" href="#abstract-5" title="Permanent link">&para;</a></h2>
+<p><strong>Induction of the CLOCK gene by E2-ERα signaling promotes the
+proliferation of breast cancer cells.</strong> PLoS One, 2014. PMID <strong>24789043</strong>.</p>
+<blockquote>
+<p>Growing genetic and epidemiological evidence suggests a direct connection between the disruption of circadian rhythm and breast cancer. Moreover, the expression of several molecular components constituting the circadian clock machinery has been found to be modulated by estrogen-estrogen receptor α (E2-ERα) signaling in ERα-positive breast cancer cells. In this study, we investigated the regulation of CLOCK expression by ERα and its roles in cell proliferation. Immunohistochemical analysis of human breast tumor samples revealed high expression of CLOCK in ERα-positive breast tumor samples. Subsequent experiments using ERα-positive human breast cancer cell lines showed that both protein and mRNA levels of CLOCK were up-regulated by E2 and ERα. In these cells, E2 promoted the binding of ERα to the EREs (estrogen-response elements) of CLOCK promoter, thereby up-regulating the transcription of CLOCK. Knockdown of CLOCK attenuated cell proliferation in ERα-positive breast cancer cells. Taken together, these results demonstrated that CLOCK could be an important gene that mediates cell proliferation in breast cancer cells.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>cell_lines</td>
+<td>yes</td>
+<td><strong>yes</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Evidence: cell_lines.</strong> One staining of tumour samples, then the
+  conclusions rest on "ERα-positive human breast cancer cell lines".</li>
+<li><strong>Expression: yes.</strong> That one staining counts: CLOCK measured by
+  immunohistochemistry "of human breast tumor samples". Questions 5
+  and 6 are independent; a cell-line paper can still say yes to 6.</li>
+</ul>
+</details>
+<h2 id="abstract-6">Abstract 6<a class="headerlink" href="#abstract-6" title="Permanent link">&para;</a></h2>
+<p><strong>Circadian rhythms and breast cancer: from molecular level to
+therapeutic advancements.</strong> J Cancer Res Clin Oncol, 2024. PMID
+<strong>39266868</strong>.</p>
+<blockquote>
+<p>BACKGROUND AND OBJECTIVES: Circadian rhythms, the endogenous biological clocks that govern physiological processes, have emerged as pivotal regulators in the development and progression of breast cancer. This comprehensive review delves into the intricate interplay between circadian disruption and breast tumorigenesis from multifaceted perspectives, encompassing biological rhythms, circadian gene regulation, tumor microenvironment dynamics, and genetic polymorphisms.</p>
+<p>METHODS AND RESULTS: Epidemiological evidence underscores the profound impact of external factors, such as night shift work, jet lag, dietary patterns, and exercise routines, on breast cancer risk and progression through the perturbation of circadian homeostasis. The review elucidates the distinct roles of key circadian genes, including CLOCK, BMAL1, PER, and CRY, in breast cancer biology, highlighting their therapeutic potential as molecular targets. Additionally, it investigates how circadian rhythm dysregulation shapes the tumor microenvironment, fostering epithelial-mesenchymal transition, chronic inflammation, and immunosuppression, thereby promoting tumor progression and metastasis. Furthermore, the review sheds light on the association between circadian gene polymorphisms and breast cancer susceptibility, paving the way for personalized risk assessment and tailored treatment strategies.</p>
+<p>CONCLUSIONS: Importantly, it explores innovative therapeutic modalities that harness circadian rhythms, including chronotherapy, melatonin administration, and traditional Chinese medicine interventions. Overall, this comprehensive review emphasizes the critical role of circadian rhythms in the pathogenesis of breast cancer and highlights the promising prospects for the development of circadian rhythm-based interventions to enhance treatment efficacy and improve patient outcomes.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>review</td>
+<td>no</td>
+<td><strong>no</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Evidence: review.</strong> "This comprehensive review". The heading
+  "Methods and results" does not make it original research.</li>
+<li><strong>Clock gene: yes.</strong> CLOCK, BMAL1, PER and CRY are named. Question 4
+  only asks whether core clock genes are named and discussed; question
+  7 is where reviews are excluded.</li>
+<li><strong>Full text: no.</strong> Reviews are always <code>no</code>. Useful for your
+  introduction, not for evidence extraction.</li>
+</ul>
+</details>
+<h2 id="abstract-7">Abstract 7<a class="headerlink" href="#abstract-7" title="Permanent link">&para;</a></h2>
+<p><strong>First-morning urinary melatonin and breast cancer risk in the Guernsey
+Study.</strong> Am J Epidemiol, 2014. PMID <strong>24418683</strong>.</p>
+<blockquote>
+<p>It has been hypothesized that suppressed nocturnal melatonin production is associated with an increased risk of breast cancer, but results from several small prospective studies of the association have been inconclusive. We examined the association between nocturnal melatonin and breast cancer risk in a case-control study nested within the Guernsey III Study, a British prospective cohort study (1977-2009). Concentrations of 6-sulfatoxymelatonin were measured in prediagnostic first-morning urine samples from 251 breast cancer cases and 727 matched controls. Conditional logistic regression models were used to calculate odds ratios for breast cancer in relation to 6-sulfatoxymelatonin level. No significant association was found between 6-sulfatoxymelatonin level and breast cancer risk, either overall (for highest third vs. lowest, multivariable-adjusted odds ratio = 0.90, 95% confidence interval: 0.61, 1.33) or by menopausal status. However, in a meta-analysis of all published prospective data, including 1,113 cases from 5 studies, higher 6-sulfatoxymelatonin levels were associated with lower breast cancer risk (for highest fourth vs. lowest, odds ratio = 0.81, 95% confidence interval: 0.66, 0.99). In summary, we found no evidence that 6-sulfatoxymelatonin level in a first-morning urine sample was associated with breast cancer risk among British women. However, overall the published data suggest a modest inverse association between melatonin levels and breast cancer risk. Further data are needed to confirm this association.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>no</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>epidemiology</td>
+<td>no</td>
+<td><strong>no</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Circadian: no.</strong> Melatonin is treated as a hormone level, never as
+  a rhythm or clock signal. You may know the light-at-night hypothesis
+  behind it; the abstract does not say it, so it does not count.</li>
+<li><strong>Evidence: epidemiology.</strong> A case-control study of cancer risk,
+  plus a meta-analysis. Urine is measured, but the question is who
+  gets cancer.</li>
+</ul>
+</details>
+<h2 id="abstract-8">Abstract 8<a class="headerlink" href="#abstract-8" title="Permanent link">&para;</a></h2>
+<p><strong>ARNTL2 is a Prognostic Biomarker and Correlates with Immune Cell
+Infiltration in Triple-Negative Breast Cancer.</strong> Pharmgenomics Pers Med,
+2021. PMID <strong>34785930</strong>.</p>
+<blockquote>
+<p>BACKGROUND: Triple-negative breast cancer (TNBC) is the most aggressive breast cancer subtype and is associated with poor prognosis. The aberrant expression of circadian genes contributes to the origin and progression of breast cancer. The present study was designed to explore the potential function and prognosis value of circadian genes in TNBC.</p>
+<p>METHODS: The transcriptome data of circadian genes were downloaded from The Cancer Genomic Atlas (TCGA), GSE25066 and GSE31448 datasets. The differential expressed circadian genes between non-TNBC and TNBC patients were analysed by Wilcoxon test. Univariate and multivariate Cox regression analyses were employed to identify the prognostic circadian genes. Gene Ontology (GO), Kyoto Encyclopedia of Genes and Genomes (KEGG) and Gene Set Enrichment Analysis (GSEA) were performed to study the biological functions of ARNTL2. The composition of 22 immune cells in the tumour samples was estimated with CIBERSORT algorithm. The correlations between ARNTL2 expression and tumour-infiltrating immune cells were evaluated by Spearman correlation coefficient.</p>
+<p>RESULTS: A total of 8 circadian genes were found to be differentially expressed between non-TNBC and TNBC, but only ARNTL2 has prognostic value. Multivariate Cox analysis identified that ARNTL2 was an independent prognosis factor for overall survival and relapse-free survival in TNBC patients. Functionally, ARNTL2 was mainly involved in immune response processes such as positive regulation of cytokine production, regulation of innate immune response, and cellular responses to molecules of bacterial origin. High expression of ARNTL2 was positively correlated with activated CD4 memory T cells, activated mast cells, and neutrophil infiltration and the expression of markers of neutrophils (ITGAM), dendritic cells (HLA-DRA, HLA-DPA1, ITGAM), Th1 (IL1B, STAT1), Th2 (IL13), Th17 (STAT3) and mast cells (TPSB2, TPSAB1).</p>
+<p>CONCLUSION: ARNTL2 may be linked with the functional modulation of the tumour immune microenvironment and serve as a potential biomarker for predicting the prognosis of TNBC patients.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>patient_samples_or_cohort</td>
+<td>yes</td>
+<td><strong>no</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Clock gene: no.</strong> ARNTL2 is not ARNTL. It is a paralogue (BMAL2)
+  and is not on the core list. The "8 circadian genes" are not named,
+  so they do not count either.</li>
+<li><strong>Full text: no.</strong> Follows from question 4. This is the abstract a
+  keyword match on "ARNTL" lets through.</li>
+<li><strong>Evidence: patient_samples_or_cohort.</strong> Tumour transcriptomes from
+  TCGA and GEO are patient samples, even though someone else collected
+  them.</li>
+</ul>
+</details>
+<h2 id="abstract-9">Abstract 9<a class="headerlink" href="#abstract-9" title="Permanent link">&para;</a></h2>
+<p><strong>Computational Analyses Reveal Deregulated Clock Genes Associated with
+Breast Cancer Development in Night Shift Workers.</strong> Int J Mol Sci, 2024.
+PMID <strong>39201344</strong>.</p>
+<blockquote>
+<p>Breast cancer (BC) is the leading cause of cancer death among women worldwide. Women employed in shift jobs face heightened BC risk due to prolonged exposure to night shift work (NSW), classified as potentially carcinogenic by the International Agency for Research on Cancer (IARC). This risk is linked to disruptions in circadian rhythms governed by clock genes at the cellular level. However, the molecular mechanisms are unclear. This study aimed to assess clock genes as potential BC biomarkers among women exposed to long-term NSW. Clock gene expression was analysed in paired BC and normal breast tissues within Nurses' Health Studies I and II GEO datasets. Validation was performed on additional gene expression datasets from healthy night shift workers and women with varying BC susceptibility, as well as single-cell sequencing datasets. Post-transcriptional regulators of clock genes were identified through miRNA analyses. Significant alterations in clock gene expression in BC compared to normal tissues were found. BHLHE40, CIART, CLOCK, PDPK1, and TIMELESS were over-expressed, while HLF, NFIL3, NPAS3, PER1, PER3, SIM1, and TEF were under-expressed. The downregulation of PER1 and TEF and upregulation of CLOCK correlated with increased BC risk in healthy women. Also, twenty-six miRNAs, including miR-10a, miR-21, miR-107, and miR-34, were identified as potential post-transcriptional regulators influenced by NSW. In conclusion, a panel of clock genes and circadian miRNAs are suggested as BC susceptibility biomarkers among night shift workers, supporting implications for risk stratification and early detection strategies.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>patient_samples_or_cohort</td>
+<td>yes</td>
+<td><strong>yes</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Compare with abstract 3.</strong> Same cohorts, same exposure, opposite
+  answer: here CLOCK, PER1 and PER3 are measured "in paired BC and
+  normal breast tissues", so the clock gene is named and the evidence
+  is tissue, not epidemiology.</li>
+<li><strong>Full text: yes.</strong> Reanalysing public data is original research.</li>
+<li>Most of the other genes listed (BHLHE40, TIMELESS, NFIL3, TEF) are
+  not core. One core gene is enough.</li>
+</ul>
+</details>
+<h2 id="abstract-10">Abstract 10<a class="headerlink" href="#abstract-10" title="Permanent link">&para;</a></h2>
+<p><strong>Time-of-Day of Initial Immune Checkpoint Inhibitor Administration and
+Its Impact on Outcomes in Metastatic Non-Small Cell Lung Cancer.</strong> JCO
+Oncol Pract, 2026. PMID <strong>42981555</strong>.</p>
+<blockquote>
+<p>PURPOSE: Immune checkpoint inhibitors (ICIs) are integral to first-line treatment of metastatic non-small cell lung cancer (NSCLC). Circadian biology may influence antitumor immunity, raising the hypothesis that time-of-day of ICI administration could affect outcomes. We evaluated the association between initial and cumulative ICI administration time-of-day and clinical outcomes in metastatic NSCLC.</p>
+<p>MATERIALS AND METHODS: We conducted a retrospective cohort study of 778 patients with metastatic NSCLC treated with first-line ICI-containing therapy across Mayo Clinic sites between January 2021 and March 2024. Patients were stratified by time-of-day of first ICI administration: early (0700-1200) versus late (1201-2400). Primary end points were overall survival (OS) and progression-free survival (PFS); the secondary end point was immune-related toxicity. Multivariable Cox proportional hazards models adjusted for clinically relevant covariates. Exploratory analyses evaluated cumulative infusion time-of-day and alternative administration-time thresholds using spline and cut-point analyses.</p>
+<p>RESULTS: Of 778 patients, 277 received early and 501 received late initial ICI administration. Median OS was 1.33 versus 1.48 versus years and median PFS was 0.65 versus 0.67 years in the late and early groups, respectively. Time-of-day of initial ICI administration was not associated with OS (HR, 1.01 [95% CI, 0.85 to 1.20]) or PFS (HR, 1.03 [95% CI, 0.88 to 1.21]). Findings were unchanged after multivariable adjustment. Immune-related toxicity occurred in 26.9% and 24.2% of patients in the late and early groups, respectively (P = .40). Cumulative infusion time-of-day was not associated with OS or PFS, and spline analyses identified no significant administration-time threshold associated with outcomes.</p>
+<p>CONCLUSION: In this large real-world cohort of patients with metastatic NSCLC, neither initial nor cumulative ICI administration time-of-day was associated with survival or immune-related toxicity. Prospective studies incorporating chronotype and circadian biomarkers are warranted to further define the role of chronotherapy in immuno-oncology.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>patient_samples_or_cohort</td>
+<td>no</td>
+<td><strong>no</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Circadian: yes.</strong> Treatment timing, framed by "circadian biology".</li>
+<li><strong>Evidence: patient_samples_or_cohort, not epidemiology.</strong>
+  Epidemiology asks who gets cancer. This follows patients who
+  already have it and records their outcomes.</li>
+<li><strong>Full text: no.</strong> No clock gene is named. A negative result would
+  not have excluded it; the missing gene does.</li>
+</ul>
+</details>
+<h2 id="abstract-11">Abstract 11<a class="headerlink" href="#abstract-11" title="Permanent link">&para;</a></h2>
+<p><strong>PER3 expression in granulosa cells of women with polycystic ovary
+syndrome: a potential role of the ovarian peripheral clock in
+infertility.</strong> Mol Biol Rep, 2026. PMID <strong>41746518</strong>.</p>
+<blockquote>
+<p>BACKGROUND: Polycystic ovary syndrome (PCOS) is a common endocrine disorder associated with infertility, metabolic dysfunction, and circadian rhythms disturbances, including delayed melatonin secretion. The human Period3 (PER3) plays an important role in regulating tissue-specific peripheral circadian clock. This suggests that the PER3 may be an important component of the ovarian circadian clock and could contribute to PCOS pathogenesis. METHODS AND RESULTS: At first, PCOS-related RNAseq studies retrieved from the GEO database and analyzed to find differential gene expression in PCOS datasets. In experimental step, follicular fluid and surrounding cumulus cells were collected from 16 PCOS patients and 12 healthy women. Isolated granulosa cells from follicular fluid were cultured in α-MEM supplemented with the addition of follicular fluid and harvested at 2-hour intervals over 12 h timepoints. PER3 gene expression was measured by real-time PCR. Melatonin and estrogen hormone concentrations in follicular fluid were measured using ELISA. Both RNA-seq and qPCR showed a significant increase in PER3 gene expression in PCOS patients compared to controls. Also, the normal oscillation patterns of PER3 were disrupted in PCOS patients. Melatonin and estrogen levels were significantly reduced in PCOS group. CONCLUSION: Our findings suggest that increased PER3 gene expression and disruption of its rhythmicity in granulosa cells appear to be associated with PCOS. This circadian disruption may contribute to changes in melatonin and estrogen levels, potentially contributing to the development of PCOS symptoms.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+<td>yes</td>
+<td>patient_samples_or_cohort</td>
+<td>yes</td>
+<td><strong>no</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Cancer: no.</strong> PCOS is not cancer, however much clock biology the
+  abstract has.</li>
+<li><strong>Expression: yes.</strong> PER3 is measured in cells from PCOS patients.
+  Question 6 asks about patient samples, not cancer patients; question
+  2 handles cancer.</li>
+<li><strong>Full text: no.</strong> No cancer, so no link to cancer.</li>
+</ul>
+</details>
+<h2 id="abstract-12">Abstract 12<a class="headerlink" href="#abstract-12" title="Permanent link">&para;</a></h2>
+<p><strong>Circadian Rhythm Disruption in Triple-Negative Breast Cancer: Molecular
+Insights and Treatment Strategies.</strong> J Pineal Res, 2025. PMID
+<strong>40193174</strong>.</p>
+<blockquote>
+<p>Disruption of the circadian clock has been closely linked to the initiation, development, and progression of cancer. This study aims to explore the impact of circadian rhythm disruption (CRD) on triple-negative breast cancer (TNBC). We analyzed bulk and single-cell RNA sequencing data to assess circadian rhythm status in TNBC using multiple bioinformatic tools, alongside metabolomic profiles and tumor microenvironment evaluations to understand the influence of CRD on metabolic reprogramming and immune evasion. The results indicate that TNBC experiences profound CRD. Patients with a higher CRDscore exhibit significantly poorer relapse-free survival compared to those with a lower CRDscore. Cyclic ordering by periodic structure (CYCLOPS) identified significant changes in rhythmic gene expression patterns between TNBC and normal tissues, with TNBC showing a "rush hour" effect, where peak expression times are concentrated within specific time windows. Transcripts with disrupted circadian rhythms in TNBC were found to be involved in key pathways related to cell cycle regulation, metabolism, and immune response. Metabolomic analysis further revealed that TNBCs with high CRDscore are enriched in carbohydrate and amino acid metabolism pathways, notably showing upregulation of tryptophan metabolism. High CRDscore was also linked to an immunosuppressive tumor microenvironment, characterized by reduced immune cell infiltration, exhausted CD8+ T cells, and a diminished response to immune checkpoint blockade therapy. These findings suggest that the disrupted molecular clock in TNBC may activate tryptophan metabolism, thereby promoting immune evasion and potentially reducing the effectiveness of immunotherapy.</p>
+</blockquote>
+<details class="success">
+<summary>Solution</summary>
+<table>
+<thead>
+<tr>
+<th>Circadian</th>
+<th>Cancer</th>
+<th>Breast</th>
+<th>Clock gene</th>
+<th>Evidence</th>
+<th>Expression</th>
+<th>Full text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>yes</td>
+<td>yes</td>
+<td>yes</td>
+<td>unsure</td>
+<td>patient_samples_or_cohort</td>
+<td>yes</td>
+<td><strong>unsure</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Not a review.</strong> The title reads like one; "We analyzed" says
+  otherwise.</li>
+<li><strong>Clock gene: unsure.</strong> The whole result is a "disrupted molecular
+  clock" scored from tumour expression, but no gene is named. The
+  abstract does not settle whether core clock genes carry the result.
+  Compare abstract 8, which names its gene, and that gene is not core.</li>
+<li><strong>Full text: unsure.</strong> Queued for reading, which is what <code>unsure</code>
+  is for: the full text will name the genes, or it will not.</li>
+</ul>
+</details>
+<h2 id="compare">Compare<a class="headerlink" href="#compare" title="Permanent link">&para;</a></h2>
+<p>Where did you differ from the solution? For each difference, decide
+whether the abstract was ambiguous or you misread a rule. If a rule was
+unclear, tell your supervisor before you start your 300: a convention
+changed halfway through means relabelling.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.sections", "navigation.instant", "search.suggest", "search.highlight", "content.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
