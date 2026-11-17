@@ -2157,11 +2157,22 @@ figure, and a judgement about whether the tool is good enough to use.</p>
 <h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
 <h3 id="1-open-the-notebook">1. Open the notebook<a class="headerlink" href="#1-open-the-notebook" title="Permanent link">&para;</a></h3>
 <p>In the <code>fyp26-tools</code> folder:</p>
-<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>marimo<span class="w"> </span>edit<span class="w"> </span>notebooks/abstract_agreement.py
+<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>run<span class="w"> </span>marimo<span class="w"> </span>edit<span class="w"> </span>notebooks/abstract_agreement.py<span class="w"> </span>--no-token
 </code></pre></div>
 <p>That opens the notebook in a browser tab. The notebook is a <strong>stub</strong>: the
 scaffolding is written, the analysis is not. Cells marked <strong>TODO</strong> are yours to
 fill in.</p>
+<div class="admonition warning">
+<p class="admonition-title">Open the notebook first, then start Claude Code</p>
+<p>Work in two terminals inside VS Code. The first runs the command above and
+stays running — closing it kills the notebook. The second runs <code>claude</code>.</p>
+<p>The agent can only reach the notebook while <strong>the browser tab is open</strong>. A
+running command with no tab open is not a session, and the agent will
+report that it cannot find one. If that happens, the notebook is closed,
+not broken.</p>
+<p><code>--no-token</code> is not optional: without it the agent cannot find the
+notebook at all. It only affects a server on your own machine.</p>
+</div>
 <div class="admonition info">
 <p class="admonition-title">This is marimo, not Jupyter</p>
 <p>You may have used Jupyter before. marimo differs in three ways that matter
@@ -2267,7 +2278,8 @@ rules, and a note of how you checked it.</p>
 <h2 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">&para;</a></h2>
 <ul>
 <li>2026-11-17 — notebook moved from Jupyter to marimo; added the skill
-  reading step.</li>
+  reading step; <code>--no-token</code> and the open-the-notebook-first rule, both
+  verified against a live kernel.</li>
 <li>2026-11-16 — first version.</li>
 </ul>
 
