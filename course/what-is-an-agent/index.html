@@ -709,10 +709,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-two-runtimes-on-this-course" class="md-nav__link">
+  <a href="#the-harness" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The two runtimes on this course
+        The harness
       
     </span>
   </a>
@@ -720,10 +720,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-one-shared-record-format" class="md-nav__link">
+  <a href="#the-two-arms-on-this-course" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why one shared record format
+        The two arms on this course
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-both-arms-are-recorded-the-same-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why both arms are recorded the same way
       
     </span>
   </a>
@@ -1880,10 +1891,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#the-two-runtimes-on-this-course" class="md-nav__link">
+  <a href="#the-harness" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The two runtimes on this course
+        The harness
       
     </span>
   </a>
@@ -1891,10 +1902,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#why-one-shared-record-format" class="md-nav__link">
+  <a href="#the-two-arms-on-this-course" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Why one shared record format
+        The two arms on this course
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-both-arms-are-recorded-the-same-way" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why both arms are recorded the same way
       
     </span>
   </a>
@@ -1930,9 +1952,9 @@
 
 
 <h1 id="what-an-ai-agent-is">What an AI agent is<a class="headerlink" href="#what-an-ai-agent-is" title="Permanent link">&para;</a></h1>
-<p>Everyone on FYP26 reads this page. Your questions go to an agent twice —
-once with tools and once without — and to a plain model with no loop at all.
-The contrast between those three is the experiment.</p>
+<p>Everyone on FYP26 reads this page. Your questions go to an agent twice — once
+with nothing but its own knowledge and a shell, once with the tools we have
+built for the job. The contrast between those two is the experiment.</p>
 <h2 id="chat-vs-agent">Chat vs agent<a class="headerlink" href="#chat-vs-agent" title="Permanent link">&para;</a></h2>
 <p>A <strong>chatbot</strong> answers. You give it text, it gives you text back.</p>
 <p>An <strong>agent</strong> acts. Given a goal, it decides what to do next, uses tools —
@@ -1947,15 +1969,36 @@ and hard to measure.</p>
 <li>a different number of steps on every run</li>
 <li>context that drifts as the conversation grows</li>
 </ul>
-<p>Any of those changes the answer. So when a score drops, you cannot tell
-whether the <em>model</em> was worse or the <em>loop</em> misbehaved.</p>
-<h2 id="the-two-runtimes-on-this-course">The two runtimes on this course<a class="headerlink" href="#the-two-runtimes-on-this-course" title="Permanent link">&para;</a></h2>
-<p><strong>Single-shot</strong> — one prompt in, one structured answer out, no tools. This
-is the <strong>control arm</strong>: it holds the loop variables still, so the agentic
-runs have something to be compared against.</p>
-<p><strong>Agentic</strong> — a goal, a set of tools, and a shell. The same questions go to
-a model that can search, read and run code. Its headline measurements are
-things only a loop can produce:</p>
+<p>Any of those changes the answer. Run the same agent on the same question
+twice and you will not get the same transcript — which is why a single run
+is an anecdote rather than a measurement.</p>
+<h2 id="the-harness">The harness<a class="headerlink" href="#the-harness" title="Permanent link">&para;</a></h2>
+<p>The model is only half of an agent. The other half is the <strong>harness</strong> — the
+tools it can call, the instructions telling it how to work, the files it can
+see. Same model, different harness, and you get a different agent.</p>
+<p>That is what this course measures.</p>
+<h2 id="the-two-arms-on-this-course">The two arms on this course<a class="headerlink" href="#the-two-arms-on-this-course" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Bare</strong></td>
+<td>the agent with its own knowledge and a shell, nothing else. It can reason and it can run commands, but it has no route to your databases and no instructions about your problem</td>
+</tr>
+<tr>
+<td><strong>Equipped</strong></td>
+<td>the same agent, same model, plus the tools and instructions we have built for degron design</td>
+</tr>
+</tbody>
+</table>
+<p>Only the harness changes. That is the point: anything the two arms disagree
+about is attributable to the tooling, not to the model having a better day.</p>
+<p>Its headline measurements are things only a loop can produce:</p>
 <ul>
 <li><strong>turns to completion</strong> — how many steps it took</li>
 <li><strong>tool-error rate</strong> — how often a tool call failed</li>
@@ -1963,16 +2006,19 @@ things only a loop can produce:</p>
 <li><strong>assertion without action</strong> — the agent claiming it ran a check it never
   ran</li>
 </ul>
-<p>That last one has already turned up in pilot testing, unprompted. It is the
-most interesting failure mode in the whole course, and it is invisible
-without a loop.</p>
-<h2 id="why-one-shared-record-format">Why one shared record format<a class="headerlink" href="#why-one-shared-record-format" title="Permanent link">&para;</a></h2>
-<p>Single-shot versus agentic, on the same task, with the same models. That
-comparison is the reason every arm writes its results into the same
-envelope — and it only works because one arm is the simple one.</p>
+<p>The last one is the most interesting failure mode on the course, and it is
+invisible without a loop — a single answer gives you no way to tell a checked
+claim from an unchecked one.</p>
+<h2 id="why-both-arms-are-recorded-the-same-way">Why both arms are recorded the same way<a class="headerlink" href="#why-both-arms-are-recorded-the-same-way" title="Permanent link">&para;</a></h2>
+<p>Bare versus equipped, on the same questions, with the same model. For that
+comparison to mean anything, both runs have to be written down in the same
+format, so that a difference in the numbers is a difference in the agents and
+not in how you took notes.</p>
 <h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
 <p><a href="https://www.anthropic.com/research/building-effective-agents">Building Effective Agents</a>
 — Anthropic. Short, and the standard reference.</p>
+<p><a href="https://magazine.sebastianraschka.com/p/components-of-a-coding-agent">Components of a Coding Agent</a>
+— Sebastian Raschka. The same loop taken apart piece by piece.</p>
 
 
 
